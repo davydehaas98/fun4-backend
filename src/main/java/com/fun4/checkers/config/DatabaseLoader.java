@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Component
 @Slf4j
+@Component
 public class DatabaseLoader implements CommandLineRunner {
 
   private final UserRepository userRepository;
