@@ -21,8 +21,8 @@ public class DatabaseLoader implements CommandLineRunner {
   @Override
   public void run(String... args) {
     log.info("Fill database with mock data");
-    userRepository.save(new User("Davy","abcdefg"));
-    userRepository.save(new User("Davy2","abcdefg"));
+    userRepository.save(new User("davy", "abcdefg"));
+    userRepository.save(new User("floris", "abcdefg"));
     log.info(userRepository.findAll().toString());
   }
 }

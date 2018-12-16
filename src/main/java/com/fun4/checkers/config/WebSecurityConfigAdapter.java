@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurity extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
   @Autowired
   CustomAuthenticationProvider customAuthenticationProvider;
@@ -28,8 +28,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.httpBasic()
         .and()
+        .logout()
+        .and()
         .authorizeRequests()
-        .antMatchers("/api/**")
+        .antMatchers("/api")
+        .authenticated()
+        .antMatchers("/ws")
         .authenticated();
   }
 
