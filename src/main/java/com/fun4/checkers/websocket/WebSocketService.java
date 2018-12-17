@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -14,26 +15,25 @@ import org.springframework.stereotype.Service;
 public class WebSocketService {
 
   private final Map<Long, Set<WebSocketClient>> clients = new HashMap<>();
-  private final UserRepository userRepository;
 
-  public WebSocketService(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
+  @Autowired
+  private UserRepository userRepository;
 
   @Transactional
   public WebSocketServer connect(WebSocketClient client, Long userId) {
     clients.computeIfAbsent(userId, u -> new HashSet<>())
         .add(client);
-    return new WebSocketConnection(client, userId);
+    return new WebSocketConnection(userId);
   }
 
   private class WebSocketConnection implements WebSocketServer {
 
-    private final WebSocketClient client;
+    @Autowired
+    private WebSocketClient client;
+
     private final long userId;
 
-    WebSocketConnection(WebSocketClient client, long userId) {
-      this.client = client;
+    WebSocketConnection(long userId) {
       this.userId = userId;
       client.hello("Hello Client");
       // Send data to client

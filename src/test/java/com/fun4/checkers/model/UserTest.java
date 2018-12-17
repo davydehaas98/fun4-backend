@@ -34,6 +34,6 @@ public class UserTest {
   public void hashcodeTest() {
     assertEquals(user1.hashCode(), user1.hashCode());
     assertNotEquals(user1.hashCode(), user2.hashCode());
-    assertNotEquals(user1.hashCode(),user3.hashCode());
+    assertEquals(user1.hashCode(),user3.hashCode());
   }
 }

@@ -3,7 +3,11 @@ package com.fun4.checkers.controller;
 import com.fun4.checkers.model.User;
 import com.fun4.checkers.model.dto.UserDto;
 import com.fun4.checkers.repository.UserRepository;
-import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.print.attribute.standard.Media;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,36 +21,45 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-  private final UserRepository userRepository;
+  @Autowired
+  private UserRepository userRepository;
 
-  UserController(UserRepository userRepository) {
-    this.userRepository = userRepository;
+  @Autowired
+  private ModelMapper modelMapper;
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public Iterable<UserDto> getUsers() {
+    return userRepository.findAll()
+        .stream().map(user -> modelMapper.map(user, UserDto.class))
+        .collect(Collectors.toList());
   }
 
-  @GetMapping
-  public Iterable<User> getUsers() {
-    return userRepository.findAll();
+  @GetMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public UserDto getUserById(@PathVariable Long userId) {
+    return modelMapper.map(
+        userRepository.findById(userId),
+        UserDto.class
+    );
   }
 
-  @PostMapping
-  public User addUser(@RequestBody UserDto body) {
-    return userRepository.save(new User(body.getUsername(), body.getPassword()));
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  public UserDto addUser(@RequestBody UserDto body) {
+    return modelMapper.map(
+        userRepository.save(new User(body.getUsername(), body.getPassword())),
+        UserDto.class
+    );
   }
 
-  @GetMapping("/{userId}")
-  public Optional<User> getUserById(@PathVariable Long userId) {
-    return userRepository.findById(userId);
-  }
-
-  @PutMapping("/{userId}")
-  public User changeUser(@RequestBody UserDto body, @PathVariable Long userId) {
-    return userRepository.findById(userId)
-        .map(user -> {
-              user.setUsername(body.getUsername());
-              user.setPassword(body.getPassword());
-              return userRepository.save(user);
-            }
-        ).orElseThrow();
+  @PutMapping(value = "/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public UserDto changeUser(@RequestBody UserDto body, @PathVariable Long userId) {
+    return modelMapper.map(
+        userRepository.findById(userId)
+            .map(u -> {
+              u.setUsername(body.getUsername());
+              u.setPassword(body.getUsername());
+              return u;
+            }),
+        UserDto.class);
   }
 
   @DeleteMapping("/{userId}")

@@ -10,6 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -22,12 +23,13 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
   private final Map<WebSocketSession, MessageDecoder<WebSocketServer>> sessions = new HashMap<>();
   private final ObjectMapper objectMapper;
-  private final WebSocketService webSocketService;
 
-  public WebSocketHandler(ObjectMapper objectMapper, WebSocketService webSocketService) {
+  @Autowired
+  private WebSocketService webSocketService;
+
+  public WebSocketHandler(ObjectMapper objectMapper) {
     log.debug("Websocket debug log enabled");
     this.objectMapper = objectMapper;
-    this.webSocketService = webSocketService;
   }
 
   @Override

@@ -11,18 +11,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-  private final UserRepository userRepository;
-
   @Autowired
-  public DatabaseLoader(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
+  private UserRepository userRepository;
 
   @Override
   public void run(String... args) {
+    loadDatabase();
+  }
+
+  private void loadDatabase() {
     log.info("Fill database with mock data");
     userRepository.save(new User("davy", "abcdefg"));
-    userRepository.save(new User("floris", "abcdefg"));
+    userRepository.save(new User("steen", "abcdefg"));
     log.info(userRepository.findAll().toString());
   }
 }

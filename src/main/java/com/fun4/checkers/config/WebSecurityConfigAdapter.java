@@ -20,8 +20,8 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
     auth.authenticationProvider(customAuthenticationProvider);
-    auth.inMemoryAuthentication()
-        .withUser("admin").password(encoder().encode("admin")).roles("ADMIN");
+//    auth.inMemoryAuthentication()
+//        .withUser("admin").password(encoder().encode("admin")).roles("ADMIN");
   }
 
   @Override
@@ -31,9 +31,9 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
         .logout()
         .and()
         .authorizeRequests()
-        .antMatchers("/api")
+        .antMatchers("/api/**")
         .authenticated()
-        .antMatchers("/ws")
+        .antMatchers("/ws/**")
         .authenticated();
   }
 
