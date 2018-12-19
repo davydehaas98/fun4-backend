@@ -1,6 +1,5 @@
 package com.fun4.checkers.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,8 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  CustomAuthenticationProvider customAuthenticationProvider;
+  private final CustomAuthenticationProvider customAuthenticationProvider;
+
+  public WebSecurityConfigAdapter(CustomAuthenticationProvider customAuthenticationProvider) {
+    this.customAuthenticationProvider = customAuthenticationProvider;
+  }
 
   @Override
   protected void configure(final AuthenticationManagerBuilder auth) throws Exception {

@@ -4,9 +4,7 @@ import com.fun4.checkers.model.User;
 import com.fun4.checkers.model.dto.UserDto;
 import com.fun4.checkers.repository.UserRepository;
 import java.util.stream.Collectors;
-import javax.print.attribute.standard.Media;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
+  private final ModelMapper modelMapper;
 
-  @Autowired
-  private ModelMapper modelMapper;
+  public UserController(UserRepository userRepository, ModelMapper modelMapper) {
+    this.userRepository = userRepository;
+    this.modelMapper = modelMapper;
+  }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Iterable<UserDto> getUsers() {

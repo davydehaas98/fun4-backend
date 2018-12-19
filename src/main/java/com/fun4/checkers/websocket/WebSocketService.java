@@ -16,8 +16,11 @@ public class WebSocketService {
 
   private final Map<Long, Set<WebSocketClient>> clients = new HashMap<>();
 
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
+
+  public WebSocketService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Transactional
   public WebSocketServer connect(WebSocketClient client, Long userId) {
@@ -28,10 +31,9 @@ public class WebSocketService {
 
   private class WebSocketConnection implements WebSocketServer {
 
+    private final long userId;
     @Autowired
     private WebSocketClient client;
-
-    private final long userId;
 
     WebSocketConnection(long userId) {
       this.userId = userId;

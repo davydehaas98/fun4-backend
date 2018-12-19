@@ -1,7 +1,6 @@
 package com.fun4.checkers.config;
 
 import com.fun4.checkers.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,8 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
+
+  public CustomAuthenticationProvider(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {

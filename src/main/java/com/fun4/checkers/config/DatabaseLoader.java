@@ -3,7 +3,6 @@ package com.fun4.checkers.config;
 import com.fun4.checkers.model.User;
 import com.fun4.checkers.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
+
+  public DatabaseLoader(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Override
   public void run(String... args) {

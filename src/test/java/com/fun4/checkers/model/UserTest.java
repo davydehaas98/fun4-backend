@@ -1,7 +1,9 @@
 package com.fun4.checkers.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import org.junit.Before;
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class UserTest {
@@ -12,9 +14,9 @@ public class UserTest {
 
   @Before
   public void setUp() {
-    user1 = new User("user1","password");
-    user2 = new User("user2","password");
-    user3 = new User("user1","password");
+    user1 = new User("user1", "password");
+    user2 = new User("user2", "password");
+    user3 = new User("user1", "password");
   }
 
   @Test
@@ -34,6 +36,6 @@ public class UserTest {
   public void hashcodeTest() {
     assertEquals(user1.hashCode(), user1.hashCode());
     assertNotEquals(user1.hashCode(), user2.hashCode());
-    assertEquals(user1.hashCode(),user3.hashCode());
+    assertEquals(user1.hashCode(), user3.hashCode());
   }
 }
