@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,7 +22,7 @@ public class Room {
   @Column(unique = true, nullable = false)
   private int number;
 
-  @OneToMany
+  @ManyToMany
   @JoinTable(name = "room_seat")
   private Collection<Seat> seats;
 

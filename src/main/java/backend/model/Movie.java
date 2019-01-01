@@ -1,6 +1,5 @@
 package backend.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Column;

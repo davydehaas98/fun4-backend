@@ -16,10 +16,14 @@ public class Seat {
   @GeneratedValue
   private long id;
 
-  @Column(unique = true, nullable = false)
+  @Column(nullable = false)
+  private int row;
+
+  @Column(nullable = false)
   private int number;
 
-  public Seat(int number) {
+  public Seat(int row, int number) {
+    this.row = row;
     this.number = number;
   }
 }

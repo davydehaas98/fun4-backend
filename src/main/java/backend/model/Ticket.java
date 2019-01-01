@@ -18,7 +18,7 @@ public class Ticket {
 
   @OneToOne
   private Event event;
-  
+
   @OneToOne
   private Seat seat;
 
