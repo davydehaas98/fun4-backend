@@ -2,37 +2,33 @@ package backend.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @Entity
-public class Movie {
+public class Cinema {
 
   @Id
   @GeneratedValue
   private long id;
 
   @Column(unique = true, nullable = false)
-  private String title;
+  private String name;
 
-  private Date releaseDate;
+  @OneToMany
+  @JoinTable(name = "cinema_room")
+  private Collection<Room> rooms;
 
-  @ManyToMany
-  @JoinTable(name = "movie_genre")
-  private Collection<Genre> genres;
-
-  public Movie(String title, Date releaseDate, Collection<Genre> genres) {
-    this.title = title;
-    this.releaseDate = releaseDate;
-    this.genres = genres;
+  public Cinema(String name, Collection<Room> rooms) {
+    this.name = name;
+    this.rooms = rooms;
   }
 }

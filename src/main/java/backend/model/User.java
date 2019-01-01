@@ -1,10 +1,14 @@
 package backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,9 +27,14 @@ public class User {
   @JsonIgnore
   private String password;
 
-  public User(String username, String password) {
+  @OneToMany
+  @JoinTable(name = "user_ticket")
+  private Collection<Ticket> tickets;
+
+  public User(String username, String password, Collection<Ticket> tickets) {
     this.username = username;
     this.password = password;
+    this.tickets = tickets;
   }
 
   @Override

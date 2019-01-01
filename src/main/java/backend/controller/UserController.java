@@ -46,7 +46,7 @@ public class UserController {
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   public UserDto addUser(@RequestBody UserDto body) {
     return modelMapper.map(
-        userRepository.save(new User(body.getUsername(), body.getPassword())),
+        userRepository.save(new User(body.getUsername(), body.getPassword(), body.getTickets())),
         UserDto.class
     );
   }

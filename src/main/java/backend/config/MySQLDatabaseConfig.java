@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @Profile({"production"})
 public class MySQLDatabaseConfig {
+
   @Value("${app.datasource.driverClassName}")
   private String driverClassName;
   @Value("${app.datasource.url}")
