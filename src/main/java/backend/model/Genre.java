@@ -1,5 +1,6 @@
 package backend.model;
 
+import backend.model.enumtype.GenreType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,9 +18,9 @@ public class Genre {
   private long id;
 
   @Column(unique = true, nullable = false)
-  private String name;
+  private GenreType name;
 
-  public Genre(String name) {
+  public Genre(GenreType name) {
     this.name = name;
   }
 }

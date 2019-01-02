@@ -1,5 +1,7 @@
 package backend.config;
 
+import backend.model.Event;
+import backend.model.enumtype.GenreType;
 import backend.model.Cinema;
 import backend.model.Genre;
 import backend.model.Movie;
@@ -7,6 +9,7 @@ import backend.model.Room;
 import backend.model.Seat;
 import backend.model.User;
 import backend.repository.CinemaRepository;
+import backend.repository.EventRepository;
 import backend.repository.GenreRepository;
 import backend.repository.MovieRepository;
 import backend.repository.RoomRepository;
@@ -33,16 +36,18 @@ public class MockDatabaseLoader implements CommandLineRunner {
   private final CinemaRepository cinemaRepository;
   private final RoomRepository roomRepository;
   private final SeatRepository seatRepository;
+  private final EventRepository eventRepository;
 
   public MockDatabaseLoader(UserRepository userRepository, MovieRepository movieRepository,
       GenreRepository genreRepository, CinemaRepository cinemaRepository,
-      RoomRepository roomRepository, SeatRepository seatRepository) {
+      RoomRepository roomRepository, SeatRepository seatRepository, EventRepository eventRepository) {
     this.userRepository = userRepository;
     this.movieRepository = movieRepository;
     this.genreRepository = genreRepository;
     this.cinemaRepository = cinemaRepository;
     this.roomRepository = roomRepository;
     this.seatRepository = seatRepository;
+    this.eventRepository = eventRepository;
   }
 
   @Override
@@ -54,24 +59,25 @@ public class MockDatabaseLoader implements CommandLineRunner {
     log.info("Fill database with mock data");
     createCinemas();
     createMovies();
+    createEvents();
     createUsers();
     log.info(cinemaRepository.findAll().toString());
     log.info(movieRepository.findAll().toString());
+    log.info(eventRepository.findAll().toString());
     log.info(userRepository.findAll().toString());
   }
 
-  private Collection<Seat> createSeats() {
-    Collection<Seat> seats = new ArrayList<>();
+  private void createSeats() {
     for (int row = 1; row < 8; row++) {
       for (int number = 1; number < 11; number++) {
-        seats.add(seatRepository.save(new Seat(row, number)));
+        seatRepository.save(new Seat(row, number));
       }
     }
-    return seats;
   }
 
   private void createRooms() {
-    Collection<Seat> seats = createSeats();
+    createSeats();
+    Collection<Seat> seats = seatRepository.findAll();
     roomRepository.save(new Room(1, seats));
     roomRepository.save(new Room(2, seats));
     roomRepository.save(new Room(3, seats));
@@ -80,23 +86,31 @@ public class MockDatabaseLoader implements CommandLineRunner {
 
   private void createCinemas() {
     createRooms();
-    cinemaRepository.save(new Cinema("Bioscoop", roomRepository.findAll()));
+    cinemaRepository.save(new Cinema("testCinema", roomRepository.findAll()));
+  }
+
+  private void createGenres() {
+    for (GenreType genreType : GenreType.values()) {
+      genreRepository.save(new Genre(genreType));
+    }
+  }
+
+  private void createMovies() {
+    createGenres();
+    Collection<Genre> genres = new ArrayList<>();
+    genres.add(genreRepository.findByName(GenreType.Action));
+    genres.add(genreRepository.findByName(GenreType.Thriller));
+    genres.add(genreRepository.findByName(GenreType.Comedy));
+    movieRepository.save(new Movie("testMovie1", new Date(), genres));
+    movieRepository.save(new Movie("testMovie2", new Date(), genres));
+  }
+
+  private void createEvents() {
+    eventRepository.save(new Event(new Date(), movieRepository.findByTitle("test1"), null));
   }
 
   private void createUsers() {
     userRepository.save(new User("davy", "davy", null));
     userRepository.save(new User("admin", "admin", null));
-  }
-
-  private void createGenres() {
-    genreRepository.save(new Genre("Action"));
-    genreRepository.save(new Genre("Adventure"));
-    genreRepository.save(new Genre("Comedy"));
-  }
-
-  private void createMovies() {
-    createGenres();
-    movieRepository.save(new Movie("name", new Date(), genreRepository.findAll()));
-    movieRepository.save(new Movie("name2", new Date(), genreRepository.findAll()));
   }
 }

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,6 +28,7 @@ public class Movie {
 
   @ManyToMany
   @JoinTable(name = "movie_genre")
+  @OrderBy("genre ASC")
   private Collection<Genre> genres;
 
   public Movie(String title, Date releaseDate, Collection<Genre> genres) {
