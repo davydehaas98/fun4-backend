@@ -61,7 +61,6 @@ public class MockDatabaseLoader implements CommandLineRunner {
     createMovies();
     createEvents();
     createUsers();
-    log.info(cinemaRepository.findAll().toString());
     log.info(movieRepository.findAll().toString());
     log.info(eventRepository.findAll().toString());
     log.info(userRepository.findAll().toString());
@@ -106,7 +105,8 @@ public class MockDatabaseLoader implements CommandLineRunner {
   }
 
   private void createEvents() {
-    eventRepository.save(new Event(new Date(), movieRepository.findByTitle("test1"), null));
+    Room room = (Room)cinemaRepository.findByName("testCinema").getRooms().toArray()[1];
+    eventRepository.save(new Event(new Date(), movieRepository.findByTitle("test1"), room));
   }
 
   private void createUsers() {

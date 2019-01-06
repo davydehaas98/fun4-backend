@@ -1,5 +1,6 @@
 package backend.config;
 
+import backend.model.User;
 import backend.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,7 +22,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     String username = authentication.getName();
     String password = authentication.getCredentials().toString();
-    var user = userRepository.findById(1L).get();
+    User user = (User)userRepository.findAll().toArray()[0];
     if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
       return new UsernamePasswordAuthenticationToken(username, password);
     } else {
