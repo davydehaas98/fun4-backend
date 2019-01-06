@@ -1,6 +1,7 @@
 package backend.config;
 
 import backend.model.Event;
+import backend.model.enumtype.UserRole;
 import backend.model.enumtype.GenreType;
 import backend.model.Cinema;
 import backend.model.Genre;
@@ -110,7 +111,7 @@ public class MockDatabaseLoader implements CommandLineRunner {
   }
 
   private void createUsers() {
-    userRepository.save(new User("davy", "davy", null));
-    userRepository.save(new User("admin", "admin", null));
+    userRepository.save(new User("davy", "davy", UserRole.USER, null));
+    userRepository.save(new User("admin", "admin", UserRole.ADMIN, null));
   }
 }

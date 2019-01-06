@@ -14,9 +14,9 @@ public class UserTest {
 
   @Before
   public void setUp() {
-    user1 = new User("user1", "password", null);
-    user2 = new User("user2", "password", null);
-    user3 = new User("user1", "password", null);
+    user1 = new User("user1", "password", null, null);
+    user2 = new User("user2", "password", null, null);
+    user3 = new User("user1", "password", null, null);
   }
 
   @Test

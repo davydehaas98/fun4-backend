@@ -2,11 +2,17 @@ package backend.config;
 
 import backend.model.User;
 import backend.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Optional;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,13 +27,18 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     String username = authentication.getName();
-    String password = authentication.getCredentials().toString();
-    User user = (User)userRepository.findAll().toArray()[0];
-    if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-      return new UsernamePasswordAuthenticationToken(username, password);
-    } else {
-      throw new BadCredentialsException("Authentication failed");
+    Object credentials = authentication.getCredentials();
+    if (!(credentials instanceof String)) {
+      return null;
     }
+    String password = credentials.toString();
+    User user = userRepository.findByUsername(username);
+    if (user == null) {
+      throw new BadCredentialsException("Authentication failed for " + username);
+    }
+    var authorities = new ArrayList<GrantedAuthority>();
+    authorities.add(user.getUserRole());
+    return new UsernamePasswordAuthenticationToken(username, password, authorities);
   }
 
   @Override
