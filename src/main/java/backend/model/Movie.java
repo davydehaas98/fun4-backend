@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class Movie {
+public class Movie{
 
   @Id
   @GeneratedValue

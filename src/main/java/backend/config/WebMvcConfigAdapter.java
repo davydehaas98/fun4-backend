@@ -13,6 +13,6 @@ public class WebMvcConfigAdapter extends WebMvcConfigurerAdapter {
   public void addCorsMappings(CorsRegistry registry) {
     registry
         .addMapping("/api/**")
-        .allowedMethods("").allowedOrigins("");
+        .allowedMethods("*").allowedOrigins("*");
   }
 }

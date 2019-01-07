@@ -3,8 +3,8 @@ package backend.controller;
 import backend.model.User;
 import backend.model.dto.UserDto;
 import backend.repository.UserRepository;
+import backend.service.UserService;
 import java.util.Collection;
-import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,51 +20,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-  private final UserRepository userRepository;
-  private final ModelMapper modelMapper;
+  private final UserService userService;
 
-  public UserController(UserRepository userRepository, ModelMapper modelMapper) {
-    this.userRepository = userRepository;
-    this.modelMapper = modelMapper;
+  public UserController(UserService userService) {
+    this.userService = userService;
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Collection<UserDto> getUsers() {
-    return userRepository.findAll()
-        .stream().map(user -> modelMapper.map(user, UserDto.class))
-        .collect(Collectors.toList());
+  public Collection<UserDto> findAll() {
+    return userService.findAll();
   }
 
   @GetMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto getUserById(@PathVariable Long userId) {
-    return modelMapper.map(
-        userRepository.findById(userId),
-        UserDto.class
-    );
+  public UserDto findById(@PathVariable Long userId) {
+    return userService.findById(userId);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto addUser(@RequestBody UserDto body) {
-    return modelMapper.map(
-        userRepository.save(new User(body.getUsername(), body.getPassword(), body.getUserRole(), body.getTickets())),
-        UserDto.class
-    );
+  public UserDto save(@RequestBody UserDto body) {
+    return userService.save(body);
   }
 
   @PutMapping(value = "/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto changeUser(@RequestBody UserDto body, @PathVariable Long userId) {
-    return modelMapper.map(
-        userRepository.findById(userId)
-            .map(u -> {
-              u.setUsername(body.getUsername());
-              u.setPassword(body.getUsername());
-              return u;
-            }),
-        UserDto.class);
+  public UserDto edit(@PathVariable Long userId, @RequestBody UserDto body) {
+    return userService.edit(userId, body);
   }
 
   @DeleteMapping("/{userId}")
-  public void deleteUser(@PathVariable Long userId) {
-    userRepository.deleteById(userId);
+  public void deleteById(@PathVariable Long userId) {
+    userService.deleteById(userId);
   }
 }
