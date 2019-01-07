@@ -1,11 +1,8 @@
 package backend.controller;
 
-import backend.model.User;
 import backend.model.dto.UserDto;
-import backend.repository.UserRepository;
 import backend.service.UserService;
 import java.util.Collection;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

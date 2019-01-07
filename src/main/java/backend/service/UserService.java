@@ -3,12 +3,11 @@ package backend.service;
 import backend.model.User;
 import backend.model.dto.UserDto;
 import backend.repository.UserRepository;
-import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService extends ServiceBase<UserDto> {
+public class UserService extends BaseService<UserDto> {
 
   public UserService(UserRepository repository, ModelMapper modelMapper) {
     super(repository, UserDto.class, modelMapper);
@@ -24,7 +23,7 @@ public class UserService extends ServiceBase<UserDto> {
 
   public UserDto edit(Long id, UserDto body) {
     return modelMapper.map(
-        ((UserRepository)repository).findById(id)
+        ((UserRepository) repository).findById(id)
             .map(item -> {
               item.setUsername(body.getUsername());
               item.setPassword(body.getUsername());

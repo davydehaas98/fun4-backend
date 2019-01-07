@@ -1,6 +1,5 @@
 package backend.service;
 
-import backend.model.User;
 import backend.model.dto.MovieDto;
 import backend.model.dto.UserDto;
 import backend.repository.MovieRepository;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MovieService {
+
   private final MovieRepository movieRepository;
   private final ModelMapper modelMapper;
 

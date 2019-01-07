@@ -1,8 +1,8 @@
 package backend.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,13 +10,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class Ticket {
+public class Ticket extends BaseEntity {
 
-  @Id
-  @GeneratedValue
-  private long id;
-
-  @OneToOne
+  @ManyToOne
   private Event event;
 
   @OneToOne

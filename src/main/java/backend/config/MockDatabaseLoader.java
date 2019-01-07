@@ -1,14 +1,15 @@
 package backend.config;
 
-import backend.model.Event;
-import backend.model.enumtype.UserRole;
-import backend.model.enumtype.GenreType;
 import backend.model.Cinema;
+import backend.model.Event;
 import backend.model.Genre;
 import backend.model.Movie;
 import backend.model.Room;
 import backend.model.Seat;
+import backend.model.Ticket;
 import backend.model.User;
+import backend.model.enumtype.GenreType;
+import backend.model.enumtype.UserRole;
 import backend.repository.CinemaRepository;
 import backend.repository.EventRepository;
 import backend.repository.GenreRepository;
@@ -41,7 +42,8 @@ public class MockDatabaseLoader implements CommandLineRunner {
 
   public MockDatabaseLoader(UserRepository userRepository, MovieRepository movieRepository,
       GenreRepository genreRepository, CinemaRepository cinemaRepository,
-      RoomRepository roomRepository, SeatRepository seatRepository, EventRepository eventRepository) {
+      RoomRepository roomRepository, SeatRepository seatRepository,
+      EventRepository eventRepository) {
     this.userRepository = userRepository;
     this.movieRepository = movieRepository;
     this.genreRepository = genreRepository;
@@ -67,21 +69,21 @@ public class MockDatabaseLoader implements CommandLineRunner {
     log.info(userRepository.findAll().toString());
   }
 
-  private void createSeats() {
+  private Collection<Seat> createSeats() {
+    Collection<Seat> seats = new ArrayList<>();
     for (int row = 1; row < 8; row++) {
       for (int number = 1; number < 11; number++) {
-        seatRepository.save(new Seat(row, number));
+        seats.add(seatRepository.save(new Seat(row, number)));
       }
     }
+    return seats;
   }
 
   private void createRooms() {
-    createSeats();
-    Collection<Seat> seats = seatRepository.findAll();
-    roomRepository.save(new Room(1, seats));
-    roomRepository.save(new Room(2, seats));
-    roomRepository.save(new Room(3, seats));
-    roomRepository.save(new Room(4, seats));
+    roomRepository.save(new Room(1, createSeats()));
+    roomRepository.save(new Room(2, createSeats()));
+    roomRepository.save(new Room(3, createSeats()));
+    roomRepository.save(new Room(4, createSeats()));
   }
 
   private void createCinemas() {
@@ -106,7 +108,7 @@ public class MockDatabaseLoader implements CommandLineRunner {
   }
 
   private void createEvents() {
-    Room room = (Room)cinemaRepository.findByName("testCinema").getRooms().toArray()[1];
+    Room room = (Room) cinemaRepository.findByName("testCinema").getRooms().toArray()[1];
     eventRepository.save(new Event(new Date(), movieRepository.findByTitle("test1"), room));
   }
 

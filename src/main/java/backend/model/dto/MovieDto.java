@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class MovieDto {
+
   private long id;
   private String title;
   private Date releaseDate;

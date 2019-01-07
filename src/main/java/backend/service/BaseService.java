@@ -2,19 +2,16 @@ package backend.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public abstract class ServiceBase<T> {
+public abstract class BaseService<T> {
 
   protected final JpaRepository repository;
   final Class<T> dtoClass;
   final ModelMapper modelMapper;
 
-  public ServiceBase(JpaRepository repository, Class<T> dtoClass, ModelMapper modelMapper) {
+  public BaseService(JpaRepository repository, Class<T> dtoClass, ModelMapper modelMapper) {
     this.repository = repository;
     this.dtoClass = dtoClass;
     this.modelMapper = modelMapper;
