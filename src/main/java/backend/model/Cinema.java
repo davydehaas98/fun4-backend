@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ public class Cinema extends BaseEntity {
 
   @OneToMany
   @JoinTable(name = "cinema_room")
+  @OrderBy("number ASC")
   private Collection<Room> rooms;
 
   public Cinema(String name, Collection<Room> rooms) {

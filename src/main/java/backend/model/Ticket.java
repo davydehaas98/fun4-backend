@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class Ticket extends BaseEntity {
 
   @ManyToOne
+  @JoinTable(name = "ticket_event")
   private Event event;
 
   @OneToOne

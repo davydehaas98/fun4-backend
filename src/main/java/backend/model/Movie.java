@@ -22,7 +22,7 @@ public class Movie extends BaseEntity {
 
   @ManyToMany
   @JoinTable(name = "movie_genre")
-  @OrderBy("genre ASC")
+  @OrderBy("name ASC")
   private Collection<Genre> genres;
 
   public Movie(String title, Date releaseDate, Collection<Genre> genres) {

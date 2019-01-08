@@ -4,7 +4,6 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +17,7 @@ public class Room extends BaseEntity {
   private int number;
 
   @OneToMany
+  @JoinTable(name = "room_seat")
   private Collection<Seat> seats;
 
   public Room(int number, Collection<Seat> seats) {
