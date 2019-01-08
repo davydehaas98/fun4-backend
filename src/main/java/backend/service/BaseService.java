@@ -1,5 +1,6 @@
 package backend.service;
 
+import backend.model.dto.BaseDto;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.modelmapper.ModelMapper;
@@ -7,9 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class BaseService<T> {
 
-  protected final JpaRepository repository;
-  final Class<T> dtoClass;
   final ModelMapper modelMapper;
+  protected JpaRepository repository;
+  Class<T> dtoClass;
 
   public BaseService(JpaRepository repository, Class<T> dtoClass, ModelMapper modelMapper) {
     this.repository = repository;
@@ -18,10 +19,12 @@ public abstract class BaseService<T> {
   }
 
   public T findById(Long id) {
-    return modelMapper.map(
-        repository.findById(id),
-        dtoClass
-    );
+    for (T item : findAll()) {
+      if (((BaseDto) item).getId().equals(id)) {
+        return item;
+      }
+    }
+    return null;
   }
 
   public Collection<T> findAll() {

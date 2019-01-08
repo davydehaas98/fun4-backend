@@ -2,6 +2,7 @@ package backend.controller;
 
 import backend.model.dto.UserDto;
 import backend.service.UserService;
+import backend.service.interfaces.IUserService;
 import java.util.Collection;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,34 +18,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-  private final UserService userService;
+  private final IUserService service;
 
-  public UserController(UserService userService) {
-    this.userService = userService;
+  public UserController(UserService service) {
+    this.service = service;
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Collection<UserDto> findAll() {
-    return userService.findAll();
+    return service.findAll();
   }
 
-  @GetMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto findById(@PathVariable Long userId) {
-    return userService.findById(userId);
+  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public UserDto findById(@PathVariable Long id) {
+    return service.findById(id);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   public UserDto save(@RequestBody UserDto body) {
-    return userService.save(body);
+    return service.save(body);
   }
 
-  @PutMapping(value = "/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto edit(@PathVariable Long userId, @RequestBody UserDto body) {
-    return userService.edit(userId, body);
+  @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public UserDto edit(@PathVariable Long id, @RequestBody UserDto body) {
+    return service.edit(id, body);
   }
 
-  @DeleteMapping("/{userId}")
-  public void deleteById(@PathVariable Long userId) {
-    userService.deleteById(userId);
+  @DeleteMapping("/{id}")
+  public void deleteById(@PathVariable Long id) {
+    service.deleteById(id);
   }
 }
