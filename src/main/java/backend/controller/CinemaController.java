@@ -1,7 +1,10 @@
 package backend.controller;
 
+import backend.model.dto.CinemaDto;
 import backend.model.dto.UserDto;
+import backend.service.CinemaService;
 import backend.service.UserService;
+import backend.service.interfaces.ICinemaService;
 import backend.service.interfaces.IUserService;
 import java.util.Collection;
 import org.springframework.http.MediaType;
@@ -15,37 +18,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/cinemas")
+public class CinemaController {
 
-  private final IUserService service;
+  private final ICinemaService service;
 
-  public UserController(UserService service) {
+  public CinemaController(CinemaService service) {
     this.service = service;
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto findById(@PathVariable Long id) {
+  public CinemaDto findById(@PathVariable Long id) {
     return service.findById(id);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Collection<UserDto> findAll() {
+  public Collection<CinemaDto> findAll() {
     return service.findAll();
   }
 
-  @GetMapping(value = "/name/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto findByUsername(@PathVariable String username) {
-    return service.findByUsername(username);
-  }
-
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto save(@RequestBody UserDto body) {
+  public CinemaDto save(@RequestBody CinemaDto body) {
     return service.save(body);
   }
 
   @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto edit(@PathVariable Long id, @RequestBody UserDto body) {
+  public CinemaDto edit(@PathVariable Long id, @RequestBody CinemaDto body) {
     return service.edit(id, body);
   }
 

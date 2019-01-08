@@ -17,15 +17,18 @@ public class MovieService implements IMovieService {
   private final ModelMapper modelMapper;
 
   public MovieService(MovieRepository repository, ModelMapper modelMapper) {
-    this.repository = repository;
     this.modelMapper = modelMapper;
+    this.repository = repository;
   }
 
   public MovieDto findById(Long id) {
-    return modelMapper.map(
-        repository.findById(id).get(),
-        MovieDto.class
-    );
+    if (repository.findById(id).isPresent()) {
+      return modelMapper.map(
+          repository.findById(id).get(),
+          MovieDto.class
+      );
+    }
+    return null;
   }
 
   public Collection<MovieDto> findAll() {

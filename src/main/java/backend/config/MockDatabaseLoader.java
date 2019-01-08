@@ -6,7 +6,6 @@ import backend.model.Genre;
 import backend.model.Movie;
 import backend.model.Room;
 import backend.model.Seat;
-import backend.model.Ticket;
 import backend.model.User;
 import backend.model.enumtype.GenreType;
 import backend.model.enumtype.UserRole;

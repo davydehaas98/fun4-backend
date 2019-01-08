@@ -2,7 +2,7 @@ package backend.service.interfaces;
 
 import java.util.Collection;
 
-public interface IBaseService<T> {
+public interface IService<T> {
 
   T findById(Long id);
 

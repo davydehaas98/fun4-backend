@@ -24,14 +24,14 @@ public class MovieController {
     this.service = service;
   }
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Collection<MovieDto> findAll() {
-    return service.findAll();
-  }
-
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public MovieDto findById(@PathVariable Long id) {
     return service.findById(id);
+  }
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public Collection<MovieDto> findAll() {
+    return service.findAll();
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

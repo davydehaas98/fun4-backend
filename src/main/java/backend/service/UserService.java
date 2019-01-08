@@ -17,15 +17,18 @@ public class UserService implements IUserService {
   private final ModelMapper modelMapper;
 
   public UserService(UserRepository repository, ModelMapper modelMapper) {
-    this.repository = repository;
     this.modelMapper = modelMapper;
+    this.repository = repository;
   }
 
   public UserDto findById(Long id) {
-    return modelMapper.map(
-        repository.findById(id).get(),
-        UserDto.class
-    );
+    if (repository.findById(id).isPresent()) {
+      return modelMapper.map(
+          repository.findById(id).get(),
+          UserDto.class
+      );
+    }
+    return null;
   }
 
   public Collection<UserDto> findAll() {

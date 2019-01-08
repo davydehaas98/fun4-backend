@@ -1,8 +1,10 @@
 package backend.controller;
 
-import backend.model.dto.UserDto;
-import backend.service.UserService;
-import backend.service.interfaces.IUserService;
+import backend.model.dto.CinemaDto;
+import backend.model.dto.EventDto;
+import backend.service.EventService;
+import backend.service.interfaces.ICinemaService;
+import backend.service.interfaces.IEventService;
 import java.util.Collection;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,37 +17,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/events")
+public class EventController {
 
-  private final IUserService service;
+  private final IEventService service;
 
-  public UserController(UserService service) {
+  public EventController(EventService service) {
     this.service = service;
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto findById(@PathVariable Long id) {
+  public EventDto findById(@PathVariable Long id) {
     return service.findById(id);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Collection<UserDto> findAll() {
+  public Collection<EventDto> findAll() {
     return service.findAll();
   }
 
-  @GetMapping(value = "/name/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto findByUsername(@PathVariable String username) {
-    return service.findByUsername(username);
-  }
-
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto save(@RequestBody UserDto body) {
+  public EventDto save(@RequestBody EventDto body) {
     return service.save(body);
   }
 
   @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto edit(@PathVariable Long id, @RequestBody UserDto body) {
+  public EventDto edit(@PathVariable Long id, @RequestBody EventDto body) {
     return service.edit(id, body);
   }
 
