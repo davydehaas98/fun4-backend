@@ -104,9 +104,9 @@ public class MockDatabaseLoader implements CommandLineRunner {
   private void createMovies() {
     createGenres();
     Collection<Genre> genres = new ArrayList<>();
-    genres.add(genreRepository.findByName(GenreType.Action));
-    genres.add(genreRepository.findByName(GenreType.Thriller));
-    genres.add(genreRepository.findByName(GenreType.Comedy));
+    genres.add(genreRepository.findByName(GenreType.ACTION));
+    genres.add(genreRepository.findByName(GenreType.THRILLER));
+    genres.add(genreRepository.findByName(GenreType.COMEDY));
     movieRepository.save(new Movie("testMovie1", new Date(), genres));
     movieRepository.save(new Movie("testMovie2", new Date(), genres));
   }
