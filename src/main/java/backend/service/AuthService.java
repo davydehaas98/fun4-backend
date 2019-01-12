@@ -7,11 +7,8 @@ import backend.model.enumtype.UserRole;
 import backend.repository.AuthRepository;
 import backend.service.interfaces.IAuthService;
 import java.util.UUID;
-import org.apache.commons.codec.digest.Crypt;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service

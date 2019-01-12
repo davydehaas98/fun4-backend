@@ -8,4 +8,6 @@ public interface IAuthService {
   UserDto register(RegisterUserDto body);
 
   UserDto login(RegisterUserDto body);
+
+  boolean checkToken(Long id, String token);
 }

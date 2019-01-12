@@ -1,9 +1,7 @@
 package backend.controller;
 
-import backend.model.dto.CinemaDto;
 import backend.model.dto.EventDto;
 import backend.service.EventService;
-import backend.service.interfaces.ICinemaService;
 import backend.service.interfaces.IEventService;
 import java.util.Collection;
 import org.springframework.http.MediaType;

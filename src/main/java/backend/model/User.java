@@ -11,7 +11,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 @Data
 @NoArgsConstructor

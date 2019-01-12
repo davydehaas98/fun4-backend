@@ -1,8 +1,6 @@
 package backend.service;
 
 import backend.model.dto.EventDto;
-import backend.model.dto.MovieDto;
-import backend.repository.CinemaRepository;
 import backend.repository.EventRepository;
 import backend.service.interfaces.IEventService;
 import java.util.Collection;
@@ -20,6 +18,7 @@ public class EventService implements IEventService {
     this.modelMapper = modelMapper;
     this.repository = repository;
   }
+
   public EventDto findById(Long id) {
     if (repository.findById(id).isPresent()) {
       return modelMapper.map(

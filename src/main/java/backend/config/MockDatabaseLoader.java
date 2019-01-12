@@ -42,7 +42,8 @@ public class MockDatabaseLoader implements CommandLineRunner {
   private final SeatRepository seatRepository;
   private final EventRepository eventRepository;
 
-  public MockDatabaseLoader(IAuthService authService, UserRepository userRepository, MovieRepository movieRepository,
+  public MockDatabaseLoader(IAuthService authService, UserRepository userRepository,
+      MovieRepository movieRepository,
       GenreRepository genreRepository, CinemaRepository cinemaRepository,
       RoomRepository roomRepository, SeatRepository seatRepository,
       EventRepository eventRepository) {

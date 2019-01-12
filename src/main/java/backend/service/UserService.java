@@ -1,7 +1,5 @@
 package backend.service;
 
-import backend.model.Ticket;
-import backend.model.User;
 import backend.model.dto.UserDto;
 import backend.repository.UserRepository;
 import backend.service.interfaces.IUserService;

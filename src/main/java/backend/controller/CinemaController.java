@@ -1,11 +1,8 @@
 package backend.controller;
 
 import backend.model.dto.CinemaDto;
-import backend.model.dto.UserDto;
 import backend.service.CinemaService;
-import backend.service.UserService;
 import backend.service.interfaces.ICinemaService;
-import backend.service.interfaces.IUserService;
 import java.util.Collection;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
