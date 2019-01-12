@@ -7,7 +7,10 @@ import backend.model.enumtype.UserRole;
 import backend.repository.AuthRepository;
 import backend.service.interfaces.IAuthService;
 import java.util.UUID;
+import org.apache.commons.codec.digest.Crypt;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,29 +19,26 @@ public class AuthService implements IAuthService {
 
   private final AuthRepository repository;
   private final ModelMapper modelMapper;
-  private final PasswordEncoder passwordEncoder;
 
-  public AuthService(AuthRepository repository, ModelMapper modelMapper,
-      PasswordEncoder passwordEncoder) {
+  public AuthService(AuthRepository repository, ModelMapper modelMapper) {
     this.modelMapper = modelMapper;
     this.repository = repository;
-    this.passwordEncoder = passwordEncoder;
   }
 
   public UserDto register(RegisterUserDto body) {
-    String encodedPassword = passwordEncoder.encode(body.getPassword());
+    String hashedPassword = BCrypt.hashpw(body.getPassword(), BCrypt.gensalt(10));
     return modelMapper.map(
-        repository.save(new User(body.getUsername(), encodedPassword, UserRole.USER, null)),
+        repository.save(new User(body.getUsername(), hashedPassword, UserRole.USER, null)),
         UserDto.class
     );
   }
 
   public UserDto login(RegisterUserDto body) {
     User user = repository.findByUsername(body.getUsername());
-    if (user != null && passwordEncoder.matches(user.getPassword(), body.getPassword())) {
+    if (user != null && BCrypt.checkpw(body.getPassword(), user.getPassword())) {
       user.setToken(UUID.randomUUID().toString());
       return modelMapper.map(
-          user,
+          repository.save(user),
           UserDto.class
       );
     }

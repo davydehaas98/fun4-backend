@@ -8,7 +8,7 @@ import lombok.Data;
 public class UserDto extends BaseDto {
 
   private String username;
-  private String password;
+  //private String password;
   private String token;
   private UserRole userRole;
   private Collection<TicketDto> tickets;
