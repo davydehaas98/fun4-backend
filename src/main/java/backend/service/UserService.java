@@ -40,25 +40,8 @@ public class UserService implements IUserService {
             )).collect(Collectors.toList());
   }
 
-  public UserDto findByUsername(String username) {
-    return modelMapper.map(
-        repository.findByUsername(username),
-        UserDto.class
-    );
-  }
-
   public UserDto save(UserDto body) {
-    Collection<Ticket> list = body.getTickets().stream()
-        .map(item ->
-            modelMapper.map(
-                item,
-                Ticket.class
-            ))
-        .collect(Collectors.toList());
-    return modelMapper.map(
-        repository.save(new User(body.getUsername(), body.getPassword(), body.getUserRole(), list)),
-        UserDto.class
-    );
+    return null;
   }
 
   public UserDto edit(Long id, UserDto body) {

@@ -1,4 +1,4 @@
-package backend.config;
+package backend.websocket.config;
 
 import backend.websocket.WebSocketHandler;
 import org.springframework.context.annotation.Configuration;

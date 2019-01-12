@@ -7,6 +7,7 @@ import backend.model.Movie;
 import backend.model.Room;
 import backend.model.Seat;
 import backend.model.User;
+import backend.model.dto.RegisterUserDto;
 import backend.model.enumtype.GenreType;
 import backend.model.enumtype.UserRole;
 import backend.repository.CinemaRepository;
@@ -16,6 +17,7 @@ import backend.repository.MovieRepository;
 import backend.repository.RoomRepository;
 import backend.repository.SeatRepository;
 import backend.repository.UserRepository;
+import backend.service.interfaces.IAuthService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -31,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Profile({"development"})
 public class MockDatabaseLoader implements CommandLineRunner {
 
+  private final IAuthService authService;
   private final UserRepository userRepository;
   private final MovieRepository movieRepository;
   private final GenreRepository genreRepository;
@@ -39,10 +42,11 @@ public class MockDatabaseLoader implements CommandLineRunner {
   private final SeatRepository seatRepository;
   private final EventRepository eventRepository;
 
-  public MockDatabaseLoader(UserRepository userRepository, MovieRepository movieRepository,
+  public MockDatabaseLoader(IAuthService authService, UserRepository userRepository, MovieRepository movieRepository,
       GenreRepository genreRepository, CinemaRepository cinemaRepository,
       RoomRepository roomRepository, SeatRepository seatRepository,
       EventRepository eventRepository) {
+    this.authService = authService;
     this.userRepository = userRepository;
     this.movieRepository = movieRepository;
     this.genreRepository = genreRepository;
@@ -114,5 +118,9 @@ public class MockDatabaseLoader implements CommandLineRunner {
   private void createUsers() {
     userRepository.save(new User("davy", "davy", UserRole.USER, null));
     userRepository.save(new User("admin", "admin", UserRole.ADMIN, null));
+    RegisterUserDto user = new RegisterUserDto();
+    user.setUsername("user");
+    user.setPassword("password");
+    authService.register(user);
   }
 }

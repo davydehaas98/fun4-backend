@@ -27,18 +27,13 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests().anyRequest().authenticated()
-        .and()
-        .httpBasic();
-  }
-
-  @Bean
-  public PasswordEncoder encoder() {
-    return new BCryptPasswordEncoder();
-  }
-
-  @Bean
-  public ModelMapper modelMapper() {
-    return new ModelMapper();
+    http.csrf().disable();
+//    http.cors()
+//        .and()
+//        .authorizeRequests()
+//        .anyRequest()
+//        .authenticated()
+//        .and()
+//        .httpBasic();
   }
 }

@@ -34,11 +34,6 @@ public class UserController {
     return service.findAll();
   }
 
-  @GetMapping(value = "/name/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto findByUsername(@PathVariable String username) {
-    return service.findByUsername(username);
-  }
-
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public UserDto save(@RequestBody UserDto body) {
     return service.save(body);

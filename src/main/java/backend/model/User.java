@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 @Data
 @NoArgsConstructor
@@ -23,6 +24,10 @@ public class User extends BaseEntity {
   @JsonIgnore
   private String password;
 
+  @Column(unique = true)
+  private String token;
+
+  @Column(nullable = false)
   @Enumerated(EnumType.ORDINAL)
   private UserRole userRole;
 
