@@ -5,6 +5,6 @@ ENV profile development
 # Set WORKDIR to root
 WORKDIR .
 # Copy target jar file into the image
-COPY ./target/*.jar ./*.jar
+COPY ./target/*.jar ./app.jar
 # Run jar and set active spring profile
 CMD ["java", "-jar", "-Dspring.profiles.active=${profile}", "app.jar"]
