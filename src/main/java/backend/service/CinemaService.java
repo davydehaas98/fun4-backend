@@ -4,6 +4,7 @@ import backend.model.dto.CinemaDto;
 import backend.repository.CinemaRepository;
 import backend.service.interfaces.ICinemaService;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,10 @@ public class CinemaService implements ICinemaService {
   }
 
   public CinemaDto findById(Long id) {
-    if (repository.findById(id).isPresent()) {
+    Optional object = repository.findById(id);
+    if (object.isPresent()) {
       return modelMapper.map(
-          repository.findById(id).get(),
+          object.get(),
           CinemaDto.class
       );
     }

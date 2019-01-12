@@ -6,6 +6,7 @@ import backend.model.dto.MovieDto;
 import backend.repository.MovieRepository;
 import backend.service.interfaces.IMovieService;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,10 @@ public class MovieService implements IMovieService {
   }
 
   public MovieDto findById(Long id) {
-    if (repository.findById(id).isPresent()) {
+    Optional object = repository.findById(id);
+    if (object.isPresent()) {
       return modelMapper.map(
-          repository.findById(id).get(),
+          object.get(),
           MovieDto.class
       );
     }

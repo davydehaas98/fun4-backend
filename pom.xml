@@ -135,7 +135,7 @@
       <artifactId>junit-vintage-engine</artifactId>
       <scope>test</scope>
     </dependency>
-    
+
     <!--AssertJ-->
     <dependency>
       <groupId>org.assertj</groupId>

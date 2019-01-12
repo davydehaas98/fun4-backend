@@ -4,6 +4,7 @@ import backend.model.dto.EventDto;
 import backend.repository.EventRepository;
 import backend.service.interfaces.IEventService;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,10 @@ public class EventService implements IEventService {
   }
 
   public EventDto findById(Long id) {
-    if (repository.findById(id).isPresent()) {
+    Optional object = repository.findById(id);
+    if (object.isPresent()) {
       return modelMapper.map(
-          repository.findById(id).get(),
+          object.get(),
           EventDto.class
       );
     }
@@ -48,6 +50,6 @@ public class EventService implements IEventService {
   }
 
   public void deleteById(Long id) {
-
+    repository.deleteById(id);
   }
 }

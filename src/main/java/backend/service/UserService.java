@@ -4,6 +4,7 @@ import backend.model.dto.UserDto;
 import backend.repository.UserRepository;
 import backend.service.interfaces.IUserService;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,10 @@ public class UserService implements IUserService {
   }
 
   public UserDto findById(Long id) {
-    if (repository.findById(id).isPresent()) {
+    Optional object = repository.findById(id);
+    if (object.isPresent()) {
       return modelMapper.map(
-          repository.findById(id).get(),
+          object.get(),
           UserDto.class
       );
     }
