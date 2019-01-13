@@ -2,7 +2,6 @@ package backend;
 
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -17,7 +16,7 @@ public class SeleniumTest {
   private String password = "password";
 
   @BeforeClass
-  public void setUp() {
+  public static void setUp() {
     System.setProperty("webdriver.gecko.driver", "C:/Users/davyd/Downloads/geckodriver.exe");
     url = "http://localhost:8080";
     driver = new FirefoxDriver();
