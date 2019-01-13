@@ -1,12 +1,9 @@
 package backend.model.enumtype;
 
-import org.springframework.security.core.GrantedAuthority;
-
-public enum UserRole implements GrantedAuthority {
+public enum UserRole {
   ADMIN,
   USER;
 
-  @Override
   public String getAuthority() {
     return "ROLE_" + this.toString();
   }
