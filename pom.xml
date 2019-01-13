@@ -112,6 +112,13 @@
       <version>3.141.59</version>
     </dependency>
 
+    <!--Guava-->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>27.0.1-jre</version>
+    </dependency>
+
     <!--JUnit-->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
