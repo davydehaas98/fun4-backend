@@ -20,14 +20,17 @@ public class Movie extends BaseEntity {
 
   private Date releaseDate;
 
+  private String imageUrl;
+
   @ManyToMany
   @JoinTable(name = "movie_genre")
   @OrderBy("name ASC")
   private Collection<Genre> genres;
 
-  public Movie(String title, Date releaseDate, Collection<Genre> genres) {
+  public Movie(String title, Date releaseDate, String imageUrl, Collection<Genre> genres) {
     this.title = title;
     this.releaseDate = releaseDate;
+    this.imageUrl = imageUrl;
     this.genres = genres;
   }
 }

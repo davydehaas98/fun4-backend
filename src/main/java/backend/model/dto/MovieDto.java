@@ -9,5 +9,6 @@ public class MovieDto extends BaseDto {
 
   private String title;
   private Date releaseDate;
+  private String imageUrl;
   private Collection<GenreDto> genres;
 }

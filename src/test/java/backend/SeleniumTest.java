@@ -18,7 +18,7 @@ public class SeleniumTest {
   @BeforeClass
   public static void setUp() {
     System.setProperty("webdriver.gecko.driver", "C:/Users/davyd/Downloads/geckodriver.exe");
-    url = "http://localhost:8080";
+    url = "http://davydehaas.nl:4042";
     driver = new FirefoxDriver();
     driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
   }

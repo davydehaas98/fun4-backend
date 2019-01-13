@@ -6,10 +6,8 @@ import backend.model.Genre;
 import backend.model.Movie;
 import backend.model.Room;
 import backend.model.Seat;
-import backend.model.User;
 import backend.model.dto.RegisterUserDto;
 import backend.model.enumtype.GenreType;
-import backend.model.enumtype.UserRole;
 import backend.repository.CinemaRepository;
 import backend.repository.EventRepository;
 import backend.repository.GenreRepository;
@@ -106,9 +104,13 @@ public class MockDatabaseLoader implements CommandLineRunner {
     Collection<Genre> genres = new ArrayList<>();
     genres.add(genreRepository.findByName(GenreType.ACTION));
     genres.add(genreRepository.findByName(GenreType.THRILLER));
+    movieRepository.save(new Movie("Iron Man", new Date(),
+        "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
+        genres));
     genres.add(genreRepository.findByName(GenreType.COMEDY));
-    movieRepository.save(new Movie("testMovie1", new Date(), genres));
-    movieRepository.save(new Movie("testMovie2", new Date(), genres));
+    movieRepository.save(new Movie("Wonder Woman", new Date(),
+        "https://m.media-amazon.com/images/M/MV5BNDFmZjgyMTEtYTk5MC00NmY0LWJhZjktOWY2MzI5YjkzODNlXkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_SY1000_SX675_AL_.jpg",
+        genres));
   }
 
   private void createEvents() {
