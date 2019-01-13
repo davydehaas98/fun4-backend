@@ -53,7 +53,7 @@ public class MovieService implements IMovieService {
         .collect(Collectors.toList());
 
     return modelMapper.map(
-        repository.save(new Movie(body.getTitle(), body.getReleaseDate(), list)),
+        repository.save(new Movie(body.getTitle(), body.getReleaseDate(), body.getImageUrl(), list)),
         MovieDto.class
     );
   }
@@ -72,6 +72,7 @@ public class MovieService implements IMovieService {
             .map(item -> {
               item.setTitle(body.getTitle());
               item.setReleaseDate(body.getReleaseDate());
+              item.setImageUrl(body.getImageUrl());
               item.setGenres(list);
               return item;
             }),
