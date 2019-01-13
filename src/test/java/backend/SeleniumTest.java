@@ -2,6 +2,7 @@ package backend;
 
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -47,8 +48,8 @@ public class SeleniumTest {
     Thread.sleep(3000);
   }
 
-  @After
-  public void tearDown() throws Exception {
+  @AfterClass
+  public static void tearDown() throws Exception {
     driver.quit();
   }
 }

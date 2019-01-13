@@ -64,12 +64,6 @@
       <version>2.2.0</version>
     </dependency>
 
-    <!--Hibernate-->
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-entitymanager</artifactId>
-    </dependency>
-
     <!--Swagger-->
     <dependency>
       <groupId>io.springfox</groupId>
