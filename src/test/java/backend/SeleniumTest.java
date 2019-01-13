@@ -14,7 +14,7 @@ public class SeleniumTest {
   private static String url;
   private static WebDriver driver;
   private String username = "admin";
-  private String password = "admin";
+  private String password = "password";
 
   @BeforeClass
   public void setUp() {
@@ -25,20 +25,8 @@ public class SeleniumTest {
   }
 
   @Test
-  public void login() throws Exception {
-    driver.navigate().to(url + "/login");
-    driver.findElement(By.name("username")).clear();
-    driver.findElement(By.name("username")).sendKeys(username);
-    driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys(password);
-    driver.findElement(By.name("login")).click();
-    Thread.sleep(3000);
-  }
-
-  @Test
   public void register() throws Exception {
     driver.navigate().to(url + "/register");
-
     driver.findElement(By.name("username")).clear();
     driver.findElement(By.name("username")).sendKeys(username);
     driver.findElement(By.name("password")).clear();
@@ -46,6 +34,17 @@ public class SeleniumTest {
     driver.findElement(By.name("passwordconfirmation")).clear();
     driver.findElement(By.name("passwordconfirmation")).sendKeys(password);
     driver.findElement(By.name("register")).click();
+    Thread.sleep(3000);
+  }
+
+  @Test
+  public void login() throws Exception {
+    driver.navigate().to(url + "/login");
+    driver.findElement(By.name("username")).clear();
+    driver.findElement(By.name("username")).sendKeys(username);
+    driver.findElement(By.name("password")).clear();
+    driver.findElement(By.name("password")).sendKeys(password);
+    driver.findElement(By.name("login")).click();
     Thread.sleep(3000);
   }
 

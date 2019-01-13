@@ -117,11 +117,17 @@ public class MockDatabaseLoader implements CommandLineRunner {
   }
 
   private void createUsers() {
-    userRepository.save(new User("davy", "davy", UserRole.USER, null));
-    userRepository.save(new User("admin", "admin", UserRole.ADMIN, null));
-    RegisterUserDto user = new RegisterUserDto();
-    user.setUsername("user");
-    user.setPassword("password");
-    authService.register(user);
+    RegisterUserDto user1 = new RegisterUserDto();
+    RegisterUserDto user2 = new RegisterUserDto();
+    RegisterUserDto user3 = new RegisterUserDto();
+    user1.setUsername("davy");
+    user1.setPassword("password");
+    authService.register(user1);
+    user2.setUsername("luc");
+    user2.setPassword("password");
+    authService.register(user2);
+    user3.setUsername("wouter");
+    user3.setPassword("password");
+    authService.register(user3);
   }
 }
