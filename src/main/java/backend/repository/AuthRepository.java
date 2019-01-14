@@ -7,5 +7,5 @@ public interface AuthRepository extends JpaRepository<User, Long> {
 
   User findByUsername(String username);
 
-  boolean findUserByIdAndToken(Long id, String token);
+  User findUserByIdAndToken(Long id, String token);
 }

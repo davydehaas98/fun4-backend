@@ -9,5 +9,5 @@ public interface IAuthService {
 
   UserDto login(RegisterUserDto body);
 
-  boolean checkToken(Long id, String token);
+  UserDto checkToken(UserDto body);
 }

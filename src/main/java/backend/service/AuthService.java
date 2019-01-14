@@ -46,7 +46,10 @@ public class AuthService implements IAuthService {
     );
   }
 
-  public boolean checkToken(Long id, String token) {
-    return repository.findUserByIdAndToken(id, token);
+  public UserDto checkToken(UserDto body) {
+    return modelMapper.map(
+        repository.findUserByIdAndToken(body.getId(), body.getToken()),
+        UserDto.class
+    );
   }
 }

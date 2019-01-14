@@ -28,4 +28,9 @@ public class AuthController {
   public UserDto login(@RequestBody RegisterUserDto body) {
     return service.login(body);
   }
+
+  @PostMapping(value = "/token", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  public UserDto login(@RequestBody UserDto body) {
+    return service.checkToken(body);
+  }
 }
