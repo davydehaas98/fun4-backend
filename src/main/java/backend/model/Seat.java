@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Seat extends BaseEntity {
 
-  @Column(nullable = false)
+  @Column(nullable = false, name = "`row`")
   private int row;
 
   @Column(nullable = false)
