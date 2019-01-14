@@ -1,7 +1,6 @@
 package backend;
 
 import java.util.concurrent.TimeUnit;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,6 +21,11 @@ public class SeleniumTest {
     url = "http://davydehaas.nl:4042";
     driver = new FirefoxDriver();
     driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+  }
+
+  @AfterClass
+  public static void tearDown() throws Exception {
+    driver.quit();
   }
 
   @Test
@@ -46,10 +50,5 @@ public class SeleniumTest {
     driver.findElement(By.name("password")).sendKeys(password);
     driver.findElement(By.name("login")).click();
     Thread.sleep(3000);
-  }
-
-  @AfterClass
-  public static void tearDown() throws Exception {
-    driver.quit();
   }
 }

@@ -1,17 +1,12 @@
 package backend.model;
 
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OrderBy;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,7 +24,7 @@ public class Movie extends BaseEntity {
 
   @ManyToMany
   @JoinTable(name = "movie_genre",
-    joinColumns = @JoinColumn(name = "movie_id"),
+      joinColumns = @JoinColumn(name = "movie_id"),
       inverseJoinColumns = @JoinColumn(name = "genre_id")
   )
   private Set<Genre> genres;

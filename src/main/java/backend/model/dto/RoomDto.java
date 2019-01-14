@@ -1,6 +1,5 @@
 package backend.model.dto;
 
-import java.util.Collection;
 import lombok.Data;
 
 @Data

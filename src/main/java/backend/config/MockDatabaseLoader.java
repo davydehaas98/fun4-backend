@@ -16,8 +16,6 @@ import backend.repository.RoomRepository;
 import backend.repository.SeatRepository;
 import backend.repository.UserRepository;
 import backend.service.interfaces.IAuthService;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
