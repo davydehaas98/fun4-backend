@@ -19,6 +19,8 @@ import backend.service.interfaces.IAuthService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
@@ -62,59 +64,58 @@ public class MockDatabaseLoader implements CommandLineRunner {
 
   private void loadDatabase() {
     log.info("Fill database with mock data");
+    createUsers();
     createCinemas();
+    createRooms();
+    createSeats();
+    createGenres();
     createMovies();
     createEvents();
-    createUsers();
     log.info(movieRepository.findAll().toString());
     log.info(eventRepository.findAll().toString());
     log.info(userRepository.findAll().toString());
   }
 
-  private Collection<Seat> createSeats() {
-    Collection<Seat> seats = new ArrayList<>();
-    for (int row = 1; row < 8; row++) {
+  private void createSeats() {
+    for (int row = 1; row < 11; row++) {
       for (int number = 1; number < 11; number++) {
-        seats.add(seatRepository.save(new Seat(row, number)));
+        seatRepository.save(new Seat(row, number));
       }
     }
-    return seats;
   }
 
   private void createRooms() {
-    roomRepository.save(new Room(1, createSeats()));
-    roomRepository.save(new Room(2, createSeats()));
-    roomRepository.save(new Room(3, createSeats()));
-    roomRepository.save(new Room(4, createSeats()));
+    Cinema cinema = cinemaRepository.findByName("Vue Eindhoven");
+    roomRepository.save(new Room(1, cinema));
+    roomRepository.save(new Room(2, cinema));
+    roomRepository.save(new Room(3, cinema));
+    roomRepository.save(new Room(4, cinema));
   }
 
   private void createCinemas() {
-    createRooms();
-    cinemaRepository.save(new Cinema("testCinema", roomRepository.findAll()));
+    cinemaRepository.save(new Cinema("Vue Eindhoven"));
   }
 
   private void createGenres() {
     for (GenreType genreType : GenreType.values()) {
-      genreRepository.save(new Genre(genreType));
+      genreRepository.save(new Genre(genreType.toString()));
     }
   }
 
   private void createMovies() {
     createGenres();
-    Collection<Genre> genres = new ArrayList<>();
-    genres.add(genreRepository.findByName(GenreType.ACTION));
-    genres.add(genreRepository.findByName(GenreType.THRILLER));
+    genreRepository.findAll();
+    Set<Genre> genres = new HashSet<>();
     movieRepository.save(new Movie("Iron Man", new Date(),
         "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
         genres));
-    genres.add(genreRepository.findByName(GenreType.COMEDY));
     movieRepository.save(new Movie("Wonder Woman", new Date(),
         "https://m.media-amazon.com/images/M/MV5BNDFmZjgyMTEtYTk5MC00NmY0LWJhZjktOWY2MzI5YjkzODNlXkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_SY1000_SX675_AL_.jpg",
         genres));
   }
 
   private void createEvents() {
-    Room room = (Room) cinemaRepository.findByName("testCinema").getRooms().toArray()[1];
+    Room room = roomRepository.findAll().get(1);
     eventRepository.save(new Event(new Date(), movieRepository.findByTitle("test1"), room));
   }
 

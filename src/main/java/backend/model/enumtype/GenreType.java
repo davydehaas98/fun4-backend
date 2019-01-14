@@ -25,5 +25,10 @@ public enum GenreType {
   SUPERHERO,
   THRILLER,
   WAR,
-  WESTERN
+  WESTERN;
+
+  @Override
+  public String toString() {
+    return name().toLowerCase();
+  }
 }

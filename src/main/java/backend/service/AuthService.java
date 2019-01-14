@@ -25,7 +25,7 @@ public class AuthService implements IAuthService {
   public UserDto register(RegisterUserDto body) {
     String hashedPassword = BCrypt.hashpw(body.getPassword(), BCrypt.gensalt(10));
     return modelMapper.map(
-        repository.save(new User(body.getUsername(), hashedPassword, UserRole.USER, null)),
+        repository.save(new User(body.getUsername(), hashedPassword, UserRole.USER)),
         UserDto.class
     );
   }

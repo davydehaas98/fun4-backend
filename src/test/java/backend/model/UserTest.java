@@ -3,6 +3,7 @@ package backend.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import backend.model.enumtype.UserRole;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,9 +15,9 @@ public class UserTest {
 
   @Before
   public void setUp() {
-    user1 = new User("user1", "password", null, null);
-    user2 = new User("user2", "password", null, null);
-    user3 = new User("user1", "password", null, null);
+    user1 = new User("user1", "password", UserRole.USER);
+    user2 = new User("user2", "password", UserRole.USER);
+    user3 = new User("user1", "password", UserRole.USER);
   }
 
   @Test

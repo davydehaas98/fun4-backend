@@ -2,8 +2,13 @@ package backend.model;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
@@ -23,11 +28,13 @@ public class Movie extends BaseEntity {
   private String imageUrl;
 
   @ManyToMany
-  @JoinTable(name = "movie_genre")
-  @OrderBy("name ASC")
-  private Collection<Genre> genres;
+  @JoinTable(name = "movie_genre",
+    joinColumns = @JoinColumn(name = "movie_id"),
+      inverseJoinColumns = @JoinColumn(name = "genre_id")
+  )
+  private Set<Genre> genres;
 
-  public Movie(String title, Date releaseDate, String imageUrl, Collection<Genre> genres) {
+  public Movie(String title, Date releaseDate, String imageUrl, Set<Genre> genres) {
     this.title = title;
     this.releaseDate = releaseDate;
     this.imageUrl = imageUrl;

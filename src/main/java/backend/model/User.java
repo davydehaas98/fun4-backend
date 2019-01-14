@@ -3,12 +3,14 @@ package backend.model;
 import backend.model.enumtype.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,17 +29,19 @@ public class User extends BaseEntity {
   private String token;
 
   @Column(nullable = false)
-  @Enumerated(EnumType.ORDINAL)
+  @Enumerated(EnumType.STRING)
   private UserRole userRole;
 
-  @OneToMany
-  @JoinTable(name = "user_ticket")
+  @OneToMany(
+      mappedBy = "user",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true
+  )
   private Collection<Ticket> tickets;
 
-  public User(String username, String password, UserRole userRole, Collection<Ticket> tickets) {
+  public User(String username, String password, UserRole userRole) {
     this.username = username;
     this.password = password;
-    this.tickets = tickets;
     this.userRole = userRole;
   }
 

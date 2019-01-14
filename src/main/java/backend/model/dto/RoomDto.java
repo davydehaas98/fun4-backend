@@ -7,5 +7,4 @@ import lombok.Data;
 public class RoomDto extends BaseDto {
 
   private int number;
-  private Collection<SeatDto> seats;
 }

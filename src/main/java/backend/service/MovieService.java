@@ -7,6 +7,7 @@ import backend.repository.MovieRepository;
 import backend.service.interfaces.IMovieService;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -44,28 +45,28 @@ public class MovieService implements IMovieService {
   }
 
   public MovieDto save(MovieDto body) {
-    Collection<Genre> list = body.getGenres().stream()
+    Set<Genre> set = body.getGenres().stream()
         .map(item ->
             modelMapper.map(
                 item,
                 Genre.class
             ))
-        .collect(Collectors.toList());
+        .collect(Collectors.toSet());
 
     return modelMapper.map(
-        repository.save(new Movie(body.getTitle(), body.getReleaseDate(), body.getImageUrl(), list)),
+        repository.save(new Movie(body.getTitle(), body.getReleaseDate(), body.getImageUrl(), set)),
         MovieDto.class
     );
   }
 
   public MovieDto edit(Long id, MovieDto body) {
-    Collection<Genre> list = body.getGenres().stream()
+    Set<Genre> set = body.getGenres().stream()
         .map(item ->
             modelMapper.map(
                 item,
                 Genre.class
             ))
-        .collect(Collectors.toList());
+        .collect(Collectors.toSet());
 
     return modelMapper.map(
         repository.findById(id)
@@ -73,7 +74,7 @@ public class MovieService implements IMovieService {
               item.setTitle(body.getTitle());
               item.setReleaseDate(body.getReleaseDate());
               item.setImageUrl(body.getImageUrl());
-              item.setGenres(list);
+              item.setGenres(set);
               return item;
             }),
         MovieDto.class
