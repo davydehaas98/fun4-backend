@@ -23,6 +23,10 @@ public class AuthService implements IAuthService {
   }
 
   public UserDto register(RegisterUserDto body) {
+    if (body.getUsername().length() < 3 || body.getUsername().length() > 32 ||
+        body.getPassword().length() < 6 || body.getPassword().length() > 32) {
+      return null;
+    }
     String hashedPassword = BCrypt.hashpw(body.getPassword(), BCrypt.gensalt(10));
     return modelMapper.map(
         repository.save(new User(body.getUsername(), hashedPassword, UserRole.USER)),
@@ -32,14 +36,14 @@ public class AuthService implements IAuthService {
 
   public UserDto login(RegisterUserDto body) {
     User user = repository.findByUsername(body.getUsername());
-    if (user != null && BCrypt.checkpw(body.getPassword(), user.getPassword())) {
-      user.setToken(UUID.randomUUID().toString());
-      return modelMapper.map(
-          repository.save(user),
-          UserDto.class
-      );
+    if (user == null || !BCrypt.checkpw(body.getPassword(), user.getPassword())) {
+      return null;
     }
-    return null;
+    user.setToken(UUID.randomUUID().toString());
+    return modelMapper.map(
+        repository.save(user),
+        UserDto.class
+    );
   }
 
   public boolean checkToken(Long id, String token) {
