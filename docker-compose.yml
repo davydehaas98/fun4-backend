@@ -1,0 +1,11 @@
+version: '3'
+services:
+    fun4-backend:
+        build: .
+        environment:
+            TZ: "Europe/Amsterdam"
+        image: fun4-backend
+        ports:
+            - 4041:4041
+        container_name: fun4-backend
+        restart: always
