@@ -41,11 +41,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'docker network create fun4-network || true'
-        sh 'docker build -t fun4-backend .'
-        sh 'docker rm -f fun4-backend || true'
-        sh 'docker run -d -p 4041:4041 --network fun4-network -e profile=production -e TZ=Europe/Amsterdam --restart=always --name fun4-backend fun4-backend'
-        sh 'docker image prune -f'
+        sh 'docker-compose run -e SPRING_PROFILES_ACTIVE=production
       }
     }
   }
