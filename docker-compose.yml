@@ -3,7 +3,8 @@ services:
     fun4-backend:
         build: .
         environment:
-            TZ: "Europe/Amsterdam"
+            - TZ=Europe/Amsterdam
+            - SPRING_PROFILES_ACTIVE=development
         image: fun4-backend
         ports:
             - 4041:4041
