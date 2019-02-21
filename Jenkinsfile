@@ -41,7 +41,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'docker-compose up -d -e SPRING_PROFILES_ACTIVE=production'
+        sh 'docker-compose up -d --force-recreate'
       }
     }
   }
