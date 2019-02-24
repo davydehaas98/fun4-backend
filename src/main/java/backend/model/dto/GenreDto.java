@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 public class GenreDto extends BaseDto {
 
-  private GenreType name;
+    private GenreType name;
 }

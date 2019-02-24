@@ -17,34 +17,35 @@ import lombok.NoArgsConstructor;
 @Entity
 public class User extends BaseEntity {
 
-  @Column(unique = true, nullable = false)
-  private String username;
+    @Column(unique = true, nullable = false)
+    private String username;
 
-  @JsonIgnore
-  private String password;
+    @JsonIgnore
+    private String password;
 
-  @Column(unique = true)
-  private String token;
+    @Column(unique = true)
+    private String token;
 
-  @Column(nullable = false)
-  @Enumerated(EnumType.STRING)
-  private UserRole userRole;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
 
-  @OneToMany(
-      mappedBy = "user",
-      cascade = CascadeType.ALL,
-      orphanRemoval = true
-  )
-  private Collection<Ticket> tickets;
+    @OneToMany(
+        mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private Collection<Ticket> tickets;
 
-  public User(String username, String password, UserRole userRole) {
-    this.username = username;
-    this.password = password;
-    this.userRole = userRole;
-  }
+    public User(String username, String password, UserRole userRole) {
+        this.username = username;
+        this.password = password;
+        this.userRole = userRole;
+    }
 
-  @Override
-  public String toString() {
-    return String.format("Id: %s, Username: %s, Password: %s", super.getId(), username, password);
-  }
+    @Override
+    public String toString() {
+        return String
+            .format("Id: %s, Username: %s, Password: %s", super.getId(), username, password);
+    }
 }

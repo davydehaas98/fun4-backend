@@ -17,8 +17,8 @@ pipeline {
             sh 'which mvn'
           },
           docker: {
-            sh 'docker --version'
-            sh 'which docker'
+            sh 'docker-compose --version'
+            sh 'which docker-compose'
           }
         )
       }
@@ -39,9 +39,20 @@ pipeline {
         }
       }
     }
-    stage('Deploy') {
+    stage('Deploy development') {
+       when {
+         branch 'master'
+       }
+       steps {
+         sh 'docker-compose -f docker-compose.development.yml up -d --force-recreate'
+       }
+    }
+    stage('Deploy production') {
+      when {
+        branch 'production'
+      }
       steps {
-        sh 'docker-compose up -d --force-recreate'
+        sh 'docker-compose -f docker-compose.production.yml up -d --force-recreate'
       }
     }
   }

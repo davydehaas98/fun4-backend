@@ -1,10 +1,10 @@
 package backend.model.enumtype;
 
 public enum UserRole {
-  ADMIN,
-  USER;
+    ADMIN,
+    USER;
 
-  public String getAuthority() {
-    return "ROLE_" + this.toString();
-  }
+    public String getAuthority() {
+        return "ROLE_" + this.toString();
+    }
 }

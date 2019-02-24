@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class EventDto extends BaseDto {
 
-  private Date date;
-  private MovieDto movie;
-  private RoomDto room;
+    private Date date;
+    private MovieDto movie;
+    private RoomDto room;
 }

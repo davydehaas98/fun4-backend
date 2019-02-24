@@ -18,34 +18,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-  private final IUserService service;
+    private final IUserService service;
 
-  public UserController(UserService service) {
-    this.service = service;
-  }
+    public UserController(UserService service) {
+        this.service = service;
+    }
 
-  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto findById(@PathVariable Long id) {
-    return service.findById(id);
-  }
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserDto findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Collection<UserDto> findAll() {
-    return service.findAll();
-  }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public Collection<UserDto> findAll() {
+        return service.findAll();
+    }
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto save(@RequestBody UserDto body) {
-    return service.save(body);
-  }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserDto save(@RequestBody UserDto body) {
+        return service.save(body);
+    }
 
-  @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserDto edit(@PathVariable Long id, @RequestBody UserDto body) {
-    return service.edit(id, body);
-  }
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserDto edit(@PathVariable Long id, @RequestBody UserDto body) {
+        return service.edit(id, body);
+    }
 
-  @DeleteMapping("/{id}")
-  public void deleteById(@PathVariable Long id) {
-    service.deleteById(id);
-  }
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        service.deleteById(id);
+    }
 }

@@ -14,24 +14,24 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Event extends BaseEntity {
 
-  private Date date;
+    private Date date;
 
-  @OneToOne
-  private Movie movie;
+    @OneToOne
+    private Movie movie;
 
-  @OneToOne
-  private Room room;
+    @OneToOne
+    private Room room;
 
-  @OneToMany(
-      mappedBy = "event",
-      cascade = CascadeType.ALL,
-      orphanRemoval = true
-  )
-  private Collection<Ticket> tickets;
+    @OneToMany(
+        mappedBy = "event",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private Collection<Ticket> tickets;
 
-  public Event(Date date, Movie movie, Room room) {
-    this.date = date;
-    this.movie = movie;
-    this.room = room;
-  }
+    public Event(Date date, Movie movie, Room room) {
+        this.date = date;
+        this.movie = movie;
+        this.room = room;
+    }
 }

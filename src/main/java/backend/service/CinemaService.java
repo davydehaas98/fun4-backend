@@ -12,44 +12,44 @@ import org.springframework.stereotype.Service;
 @Service
 public class CinemaService implements ICinemaService {
 
-  private final CinemaRepository repository;
-  private final ModelMapper modelMapper;
+    private final CinemaRepository repository;
+    private final ModelMapper modelMapper;
 
-  public CinemaService(CinemaRepository repository, ModelMapper modelMapper) {
-    this.modelMapper = modelMapper;
-    this.repository = repository;
-  }
-
-  public CinemaDto findById(Long id) {
-    Optional object = repository.findById(id);
-    if (object.isPresent()) {
-      return modelMapper.map(
-          object.get(),
-          CinemaDto.class
-      );
+    public CinemaService(CinemaRepository repository, ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+        this.repository = repository;
     }
-    return null;
-  }
 
-  public Collection<CinemaDto> findAll() {
-    return repository.findAll().stream()
-        .map(item ->
-            modelMapper.map(
-                item,
+    public CinemaDto findById(Long id) {
+        Optional object = repository.findById(id);
+        if (object.isPresent()) {
+            return modelMapper.map(
+                object.get(),
                 CinemaDto.class
-            ))
-        .collect(Collectors.toList());
-  }
+            );
+        }
+        return null;
+    }
 
-  public CinemaDto save(CinemaDto body) {
-    return null;
-  }
+    public Collection<CinemaDto> findAll() {
+        return repository.findAll().stream()
+            .map(item ->
+                modelMapper.map(
+                    item,
+                    CinemaDto.class
+                ))
+            .collect(Collectors.toList());
+    }
 
-  public CinemaDto edit(Long id, CinemaDto body) {
-    return null;
-  }
+    public CinemaDto save(CinemaDto body) {
+        return null;
+    }
 
-  public void deleteById(Long id) {
-    repository.deleteById(id);
-  }
+    public CinemaDto edit(Long id, CinemaDto body) {
+        return null;
+    }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
 }

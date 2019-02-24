@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class MovieDto extends BaseDto {
 
-  private String title;
-  private Date releaseDate;
-  private String imageUrl;
-  private Set<GenreDto> genres;
+    private String title;
+    private Date releaseDate;
+    private String imageUrl;
+    private Set<GenreDto> genres;
 }

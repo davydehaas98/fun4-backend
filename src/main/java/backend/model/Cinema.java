@@ -13,17 +13,17 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Cinema extends BaseEntity {
 
-  @Column(unique = true, nullable = false)
-  private String name;
+    @Column(unique = true, nullable = false)
+    private String name;
 
-  @OneToMany(
-      mappedBy = "cinema",
-      cascade = CascadeType.ALL,
-      orphanRemoval = true
-  )
-  private Collection<Room> rooms;
+    @OneToMany(
+        mappedBy = "cinema",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private Collection<Room> rooms;
 
-  public Cinema(String name) {
-    this.name = name;
-  }
+    public Cinema(String name) {
+        this.name = name;
+    }
 }

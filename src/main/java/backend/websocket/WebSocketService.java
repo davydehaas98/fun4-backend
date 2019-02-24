@@ -14,41 +14,41 @@ import org.springframework.stereotype.Service;
 @Service
 public class WebSocketService {
 
-  private final Map<Long, Set<WebSocketClient>> clients = new HashMap<>();
+    private final Map<Long, Set<WebSocketClient>> clients = new HashMap<>();
 
-  private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-  public WebSocketService(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
-
-  @Transactional
-  public WebSocketServer connect(WebSocketClient client, Long userId) {
-    clients.computeIfAbsent(userId, u -> new HashSet<>())
-        .add(client);
-    return new WebSocketConnection(userId);
-  }
-
-  private class WebSocketConnection implements WebSocketServer {
-
-    private final long userId;
-    @Autowired
-    private WebSocketClient client;
-
-    WebSocketConnection(long userId) {
-      this.userId = userId;
-      client.hello("Hello Client");
-      // Send data to client
+    public WebSocketService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    @Override
-    public void hello(String name) {
-      log.info("client said {}", name);
+    @Transactional
+    public WebSocketServer connect(WebSocketClient client, Long userId) {
+        clients.computeIfAbsent(userId, u -> new HashSet<>())
+            .add(client);
+        return new WebSocketConnection(userId);
     }
 
-    @Override
-    public void disconnect() {
-      clients.get(userId).remove(client);
+    private class WebSocketConnection implements WebSocketServer {
+
+        private final long userId;
+        @Autowired
+        private WebSocketClient client;
+
+        WebSocketConnection(long userId) {
+            this.userId = userId;
+            client.hello("Hello Client");
+            // Send data to client
+        }
+
+        @Override
+        public void hello(String name) {
+            log.info("client said {}", name);
+        }
+
+        @Override
+        public void disconnect() {
+            clients.get(userId).remove(client);
+        }
     }
-  }
 }

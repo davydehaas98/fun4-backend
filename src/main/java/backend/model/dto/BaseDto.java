@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public abstract class BaseDto {
 
-  private Long id;
+    private Long id;
 }

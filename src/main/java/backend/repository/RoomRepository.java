@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-  Room findByCinema_Id(Long id);
+    Room findByCinema_Id(Long id);
 }

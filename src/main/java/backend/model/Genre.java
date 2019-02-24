@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Genre extends BaseEntity {
 
-  @Column
-  private String name;
+    @Column
+    private String name;
 
 //  @ManyToMany(fetch = FetchType.LAZY,
 //  cascade = {
@@ -20,7 +20,7 @@ public class Genre extends BaseEntity {
 //  })
 //  private Set<Movie> movies = new HashSet<>();
 
-  public Genre(String name) {
-    this.name = name;
-  }
+    public Genre(String name) {
+        this.name = name;
+    }
 }

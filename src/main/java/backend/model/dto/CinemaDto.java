@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class CinemaDto extends BaseDto {
 
-  private String name;
-  private Collection<RoomDto> rooms;
+    private String name;
+    private Collection<RoomDto> rooms;
 }

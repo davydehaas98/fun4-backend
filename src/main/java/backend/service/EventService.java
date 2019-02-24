@@ -12,44 +12,44 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventService implements IEventService {
 
-  private final EventRepository repository;
-  private final ModelMapper modelMapper;
+    private final EventRepository repository;
+    private final ModelMapper modelMapper;
 
-  public EventService(EventRepository repository, ModelMapper modelMapper) {
-    this.modelMapper = modelMapper;
-    this.repository = repository;
-  }
-
-  public EventDto findById(Long id) {
-    Optional object = repository.findById(id);
-    if (object.isPresent()) {
-      return modelMapper.map(
-          object.get(),
-          EventDto.class
-      );
+    public EventService(EventRepository repository, ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+        this.repository = repository;
     }
-    return null;
-  }
 
-  public Collection<EventDto> findAll() {
-    return repository.findAll().stream()
-        .map(item ->
-            modelMapper.map(
-                item,
+    public EventDto findById(Long id) {
+        Optional object = repository.findById(id);
+        if (object.isPresent()) {
+            return modelMapper.map(
+                object.get(),
                 EventDto.class
-            ))
-        .collect(Collectors.toList());
-  }
+            );
+        }
+        return null;
+    }
 
-  public EventDto save(EventDto body) {
-    return null;
-  }
+    public Collection<EventDto> findAll() {
+        return repository.findAll().stream()
+            .map(item ->
+                modelMapper.map(
+                    item,
+                    EventDto.class
+                ))
+            .collect(Collectors.toList());
+    }
 
-  public EventDto edit(Long id, EventDto body) {
-    return null;
-  }
+    public EventDto save(EventDto body) {
+        return null;
+    }
 
-  public void deleteById(Long id) {
-    repository.deleteById(id);
-  }
+    public EventDto edit(Long id, EventDto body) {
+        return null;
+    }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
 }

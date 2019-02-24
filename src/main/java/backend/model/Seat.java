@@ -13,21 +13,21 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Seat extends BaseEntity {
 
-  @Column(nullable = false, name = "`row`")
-  private int row;
+    @Column(nullable = false, name = "`row`")
+    private int row;
 
-  @Column(nullable = false)
-  private int number;
+    @Column(nullable = false)
+    private int number;
 
-  @OneToMany(
-      mappedBy = "seat",
-      cascade = CascadeType.ALL,
-      orphanRemoval = true
-  )
-  private Collection<Ticket> tickets;
+    @OneToMany(
+        mappedBy = "seat",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private Collection<Ticket> tickets;
 
-  public Seat(int row, int number) {
-    this.row = row;
-    this.number = number;
-  }
+    public Seat(int row, int number) {
+        this.row = row;
+        this.number = number;
+    }
 }

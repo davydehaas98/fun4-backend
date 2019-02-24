@@ -13,19 +13,19 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Room extends BaseEntity {
 
-  @Column(unique = true, nullable = false)
-  private int number;
+    @Column(unique = true, nullable = false)
+    private int number;
 
 //  @ManyToMany
 //  @JoinTable(name = "room_seat")
 //  private Collection<Seat> seats;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "cinema_id")
-  private Cinema cinema;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cinema_id")
+    private Cinema cinema;
 
-  public Room(int number, Cinema cinema) {
-    this.number = number;
-    this.cinema = cinema;
-  }
+    public Room(int number, Cinema cinema) {
+        this.number = number;
+        this.cinema = cinema;
+    }
 }

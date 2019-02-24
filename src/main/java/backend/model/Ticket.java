@@ -12,21 +12,21 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Ticket extends BaseEntity {
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "event_id")
-  private Event event;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")
+    private Event event;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "seat_id")
-  private Seat seat;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seat_id")
+    private Seat seat;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
-  private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-  public Ticket(Event event, Seat seat, User user) {
-    this.event = event;
-    this.seat = seat;
-    this.user = user;
-  }
+    public Ticket(Event event, Seat seat, User user) {
+        this.event = event;
+        this.seat = seat;
+        this.user = user;
+    }
 }

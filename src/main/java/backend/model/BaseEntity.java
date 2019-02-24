@@ -9,7 +9,7 @@ import lombok.Data;
 @MappedSuperclass
 abstract class BaseEntity {
 
-  @Id
-  @GeneratedValue
-  private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 }

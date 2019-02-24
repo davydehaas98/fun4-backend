@@ -18,34 +18,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/movies")
 public class MovieController {
 
-  private final IMovieService service;
+    private final IMovieService service;
 
-  public MovieController(MovieService service) {
-    this.service = service;
-  }
+    public MovieController(MovieService service) {
+        this.service = service;
+    }
 
-  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public MovieDto findById(@PathVariable Long id) {
-    return service.findById(id);
-  }
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public MovieDto findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Collection<MovieDto> findAll() {
-    return service.findAll();
-  }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public Collection<MovieDto> findAll() {
+        return service.findAll();
+    }
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public MovieDto save(@RequestBody MovieDto body) {
-    return service.save(body);
-  }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public MovieDto save(@RequestBody MovieDto body) {
+        return service.save(body);
+    }
 
-  @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public MovieDto edit(@PathVariable Long id, @RequestBody MovieDto body) {
-    return service.edit(id, body);
-  }
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public MovieDto edit(@PathVariable Long id, @RequestBody MovieDto body) {
+        return service.edit(id, body);
+    }
 
-  @DeleteMapping("/{id}")
-  public void deleteById(@PathVariable Long id) {
-    service.deleteById(id);
-  }
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        service.deleteById(id);
+    }
 }
