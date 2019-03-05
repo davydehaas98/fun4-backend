@@ -1,12 +1,12 @@
 version: '3'
 services:
-  fun4-backend:
+  fun4-backend-dev:
     build: .
     environment:
       - TZ=Europe/Amsterdam
       - SPRING_PROFILES_ACTIVE=development
-    image: fun4-backend
+    image: fun4-backend-dev
     ports:
       - 4041:4041
-    container_name: fun4-backend
+    container_name: fun4-backend-dev
     restart: always
