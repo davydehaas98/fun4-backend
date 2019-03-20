@@ -6,7 +6,7 @@ services:
       - TZ=Europe/Amsterdam
       - SPRING_PROFILES_ACTIVE=development
     image: fun4-backend-dev
-    ports:
-      - 4041:4041
+    expose:
+      - 4041
     container_name: fun4-backend-dev
     restart: always
