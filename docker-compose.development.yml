@@ -11,4 +11,5 @@ services:
     container_name: fun4-backend-dev
     restart: always
     networks:
-      - fun4-dev
+      fun4-dev:
+        driver: bridge
