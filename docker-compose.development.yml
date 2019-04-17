@@ -14,5 +14,5 @@ services:
       - fun4-dev
     
 networks:
-  default:
+  fun4-dev:
     name: fun4-dev
