@@ -2,7 +2,6 @@ version: '3'
 services:
   fun4-backend:
     build: .
-    image: fun4-backend
     environment:
       - TZ=Europe/Amsterdam
       - SPRING_PROFILES_ACTIVE=production
