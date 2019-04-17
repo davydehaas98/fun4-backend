@@ -17,6 +17,10 @@ pipeline {
             sh 'which mvn'
           },
           docker: {
+            sh 'docker --version'
+            sh 'which docker'
+          },
+          docker-compose: {
             sh 'docker-compose --version'
             sh 'which docker-compose'
           }

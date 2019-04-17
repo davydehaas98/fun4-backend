@@ -7,6 +7,8 @@ services:
       - SPRING_PROFILES_ACTIVE=production
     image: fun4-backend
     expose:
-      - 4042
+      - 4051
     container_name: fun4-backend
     restart: always
+    networks:
+      - fun4
