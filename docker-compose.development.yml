@@ -1,4 +1,4 @@
-version: '3.5'
+version: '3.7'
 services:
   fun4-backend-dev:
     build: .
@@ -14,5 +14,5 @@ services:
       - fun4-dev
     
 networks:
-  fun4-dev:
+  fun4-dev: {}
     name: fun4-dev
