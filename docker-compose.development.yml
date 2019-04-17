@@ -14,5 +14,6 @@ services:
       - fun4-dev
     
 networks:
-  fun4-dev:
+  default:
     name: fun4-dev
+    driver: bridge
