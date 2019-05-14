@@ -5,8 +5,8 @@ services:
     environment:
       - TZ=Europe/Amsterdam
     image: fun4-backend-dev
-    expose:
-      - 4053
+    ports:
+      - "4053:4053"
     container_name: fun4-backend-dev
     restart: unless-stopped
     command: bash -c "cd . && java -jar -Dspring.profiles.active=development app.jar"
