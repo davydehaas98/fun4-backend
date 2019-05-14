@@ -4,12 +4,11 @@ services:
     build: .
     environment:
       - TZ=Europe/Amsterdam
-      - SPRING_PROFILES_ACTIVE=production
     image: fun4-backend
     expose:
       - 4051
     container_name: fun4-backend
     restart: always
-    command: bash -c "cd . && java -jar"
+    command: bash -c "cd . && java -jar -Dspring.profiles.active=development"
     networks:
       - fun4
