@@ -9,6 +9,6 @@ services:
       - 4051
     container_name: fun4-backend
     restart: always
-    command: bash -c "cd . && java -jar -Dspring.profiles.active=development app.jar"
+    command: bash -c "cd . && java -jar -Dspring.profiles.active=production app.jar"
     networks:
       - fun4
