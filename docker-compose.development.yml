@@ -8,7 +8,7 @@ services:
     expose:
       - 4053
     container_name: fun4-backend-dev
-    restart: always
+    restart: unless-stopped
     command: bash -c "cd . && java -jar -Dspring.profiles.active=development app.jar"
     networks:
       - fun4-dev
