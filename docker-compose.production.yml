@@ -6,7 +6,7 @@ services:
       - TZ=Europe/Amsterdam
     image: fun4-backend
     ports:
-      - "4053:4053"
+      - "4051:4051"
     container_name: fun4-backend
     restart: unless-stopped
     command: bash -c "cd . && java -jar -Dspring.profiles.active=production app.jar"
