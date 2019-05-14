@@ -37,10 +37,10 @@ pipeline {
                 sh "mvn test || true"
                 sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin -Dsonar.password=admin || true"
             }
-            post {
-                always {
-                    junit "**/target/surefire-reports/*.xml"
-                }
+        }
+        post {
+            always {
+                junit "**/target/surefire-reports/*.xml"
             }
         }
         stage("Deploy production") {
