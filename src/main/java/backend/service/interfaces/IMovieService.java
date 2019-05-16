@@ -1,7 +1,7 @@
 package backend.service.interfaces;
 
-import backend.model.dto.MovieDto;
+import backend.model.Movie;
 
-public interface IMovieService extends IService<MovieDto> {
+public interface IMovieService extends IService<Movie> {
 
 }

@@ -1,7 +1,7 @@
 package backend.service.interfaces;
 
-import backend.model.dto.GenreDto;
+import backend.model.Genre;
 
-public interface IGenreService extends IService<GenreDto> {
+public interface IGenreService extends IService<Genre> {
 
 }

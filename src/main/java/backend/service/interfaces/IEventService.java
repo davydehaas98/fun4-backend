@@ -1,7 +1,7 @@
 package backend.service.interfaces;
 
-import backend.model.dto.EventDto;
+import backend.model.Event;
 
-public interface IEventService extends IService<EventDto> {
+public interface IEventService extends IService<Event> {
 
 }

@@ -6,8 +6,9 @@ import backend.model.Genre;
 import backend.model.Movie;
 import backend.model.Room;
 import backend.model.Seat;
-import backend.model.dto.RegisterUserDto;
+import backend.model.User;
 import backend.model.enumtype.GenreType;
+import backend.model.enumtype.UserRole;
 import backend.repository.CinemaRepository;
 import backend.repository.EventRepository;
 import backend.repository.GenreRepository;
@@ -102,7 +103,7 @@ public class MockDatabaseLoader implements CommandLineRunner {
 
     private void createMovies() {
         createGenres();
-        genreRepository.findAll();
+        //Set<Genre> genres = genreRepository.findAll();
         Set<Genre> genres = new HashSet<>();
         movieRepository.save(new Movie("Iron Man", new Date(),
             "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
@@ -114,21 +115,17 @@ public class MockDatabaseLoader implements CommandLineRunner {
 
     private void createEvents() {
         Room room = roomRepository.findAll().get(1);
-        eventRepository.save(new Event(new Date(), movieRepository.findByTitle("test1"), room));
+        eventRepository.save(new Event(new Date(), movieRepository.findByTitle("Iron Man"), room));
     }
 
     private void createUsers() {
-        RegisterUserDto user1 = new RegisterUserDto();
-        RegisterUserDto user2 = new RegisterUserDto();
-        RegisterUserDto user3 = new RegisterUserDto();
-        user1.setUsername("davy");
-        user1.setPassword("password");
+        User user1 = new User("davy", "password", UserRole.ADMIN);
+        User user2 = new User("wouter", "password", UserRole.USER);
+        User user3 = new User("luc", "password", UserRole.USER);
+        User user4 = new User("floris", "password", UserRole.USER);
         authService.register(user1);
-        user2.setUsername("luc");
-        user2.setPassword("password");
         authService.register(user2);
-        user3.setUsername("wouter");
-        user3.setPassword("password");
         authService.register(user3);
+        authService.register(user4);
     }
 }
