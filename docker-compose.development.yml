@@ -2,16 +2,16 @@ version: '3.6'
 services:
     fun4-backend-dev:
         build: .
-    environment:
-        - TZ=Europe/Amsterdam
-    image: fun4-backend-dev
-    ports:
-        - "4053:4053"
-    container_name: fun4-backend-dev
-    restart: unless-stopped
-    command: bash -c "cd . && java -jar -Dspring.profiles.active=development app.jar"
-    networks:
-        - fun4-dev
+        environment:
+            - TZ=Europe/Amsterdam
+        image: fun4-backend-dev
+        ports:
+            - "4053:4053"
+        container_name: fun4-backend-dev
+        restart: unless-stopped
+        command: bash -c "cd . && java -jar -Dspring.profiles.active=development app.jar"
+        networks:
+            - fun4-dev
 
 networks:
     fun4-dev:
