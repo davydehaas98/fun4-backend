@@ -1,13 +1,12 @@
 package backend.service.interfaces;
 
-import backend.model.dto.RegisterUserDto;
-import backend.model.dto.UserDto;
+import backend.model.User;
 
 public interface IAuthService {
 
-    UserDto register(RegisterUserDto body);
+    User register(User body);
 
-    UserDto login(RegisterUserDto body);
+    User login(User body);
 
-    UserDto checkToken(UserDto body);
+    User checkToken(User body);
 }

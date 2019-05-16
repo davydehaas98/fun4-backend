@@ -1,7 +1,7 @@
 package backend.service.interfaces;
 
-import backend.model.dto.CinemaDto;
+import backend.model.Cinema;
 
-public interface ICinemaService extends IService<CinemaDto> {
+public interface ICinemaService extends IService<Cinema> {
 
 }

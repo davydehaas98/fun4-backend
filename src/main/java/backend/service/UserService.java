@@ -1,58 +1,40 @@
 package backend.service;
 
-import backend.model.dto.UserDto;
+import backend.model.User;
 import backend.repository.UserRepository;
 import backend.service.interfaces.IUserService;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements IUserService {
 
     private final UserRepository repository;
-    private final ModelMapper modelMapper;
 
-    public UserService(UserRepository repository, ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    public UserService(UserRepository repository) {
         this.repository = repository;
     }
 
-    public UserDto findById(Long id) {
-        Optional object = repository.findById(id);
-        if (object.isPresent()) {
-            return modelMapper.map(
-                object.get(),
-                UserDto.class
-            );
-        }
-        return null;
+    public User findById(Long id) {
+        return repository.findById(id).orElseThrow();
     }
 
-    public Collection<UserDto> findAll() {
-        return repository.findAll().stream()
-            .map(item ->
-                modelMapper.map(
-                    item,
-                    UserDto.class
-                )).collect(Collectors.toList());
+    public Collection<User> findAll() {
+        return new ArrayList<>(repository.findAll());
     }
 
-    public UserDto save(UserDto body) {
-        return null;
+    public User save(User body) {
+        return repository.save(body);
     }
 
-    public UserDto edit(Long id, UserDto body) {
-        return modelMapper.map(
-            repository.findById(id)
-                .map(item -> {
-                    item.setUsername(body.getUsername());
-                    item.setPassword(body.getUsername());
-                    return item;
-                }),
-            UserDto.class);
+    public User edit(Long id, User body) {
+        User item = repository.findById(id).orElseThrow();
+
+        item.setUsername(body.getUsername());
+        item.setPassword(body.getUsername());
+
+        return repository.save(item);
     }
 
     public void deleteById(Long id) {

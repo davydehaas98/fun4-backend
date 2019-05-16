@@ -1,7 +1,7 @@
 package backend.service.interfaces;
 
-import backend.model.dto.SeatDto;
+import backend.model.Seat;
 
-public interface ISeatService extends IService<SeatDto> {
+public interface ISeatService extends IService<Seat> {
 
 }

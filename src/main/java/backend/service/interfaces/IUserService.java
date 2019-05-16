@@ -1,7 +1,7 @@
 package backend.service.interfaces;
 
-import backend.model.dto.UserDto;
+import backend.model.User;
 
-public interface IUserService extends IService<UserDto> {
+public interface IUserService extends IService<User> {
 
 }

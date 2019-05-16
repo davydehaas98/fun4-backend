@@ -1,7 +1,7 @@
 package backend.service.interfaces;
 
-import backend.model.dto.RoomDto;
+import backend.model.Room;
 
-public interface IRoomService extends IService<RoomDto> {
+public interface IRoomService extends IService<Room> {
 
 }

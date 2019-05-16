@@ -1,51 +1,34 @@
 package backend.service;
 
-import backend.model.dto.EventDto;
+import backend.model.Event;
 import backend.repository.EventRepository;
 import backend.service.interfaces.IEventService;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EventService implements IEventService {
 
     private final EventRepository repository;
-    private final ModelMapper modelMapper;
 
-    public EventService(EventRepository repository, ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    public EventService(EventRepository repository) {
         this.repository = repository;
     }
 
-    public EventDto findById(Long id) {
-        Optional object = repository.findById(id);
-        if (object.isPresent()) {
-            return modelMapper.map(
-                object.get(),
-                EventDto.class
-            );
-        }
-        return null;
+    public Event findById(Long id) {
+        return repository.findById(id).orElseThrow();
     }
 
-    public Collection<EventDto> findAll() {
-        return repository.findAll().stream()
-            .map(item ->
-                modelMapper.map(
-                    item,
-                    EventDto.class
-                ))
-            .collect(Collectors.toList());
+    public Collection<Event> findAll() {
+        return new ArrayList<>(repository.findAll());
     }
 
-    public EventDto save(EventDto body) {
-        return null;
+    public Event save(Event body) {
+        return repository.save(body);
     }
 
-    public EventDto edit(Long id, EventDto body) {
+    public Event edit(Long id, Event body) {
         return null;
     }
 

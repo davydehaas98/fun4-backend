@@ -1,7 +1,7 @@
 package backend.service.interfaces;
 
-import backend.model.dto.TicketDto;
+import backend.model.Ticket;
 
-public interface ITicketService extends IService<TicketDto> {
+public interface ITicketService extends IService<Ticket> {
 
 }
