@@ -1,10 +1,15 @@
 package backend.controller;
 
 import backend.model.Movie;
-import backend.model.dto.MovieDto;
+import backend.model.dto.GenreDTO;
+import backend.model.dto.MovieDTO;
 import backend.service.MovieService;
 import backend.service.interfaces.IMovieService;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
@@ -30,27 +35,37 @@ public class MovieController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public MovieDto findById(@PathVariable Long id) {
-        return modelMapper.map(service.findById(id), MovieDto.class);
+    public MovieDTO findById(@PathVariable Long id) {
+        return modelMapper.map(
+            service.findById(id),
+            MovieDTO.class
+        );
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<MovieDto> findAll() {
-        return service.findAll()
-            .stream().map(item ->
-                modelMapper.map(item, MovieDto.class)
-            ).collect(Collectors.toList());
+    public Collection<MovieDTO> findAll() {
+        return service.findAll().stream().map(item ->
+            modelMapper.map(
+                item,
+                MovieDTO.class
+            )
+        ).collect(Collectors.toList());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public MovieDto save(@RequestBody MovieDto body) {
-        return modelMapper.map(service.save(modelMapper.map(body, Movie.class)), MovieDto.class);
+    public MovieDTO save(@RequestBody MovieDTO body) {
+        return modelMapper.map(
+            service.save(modelMapper.map(body, Movie.class)),
+            MovieDTO.class
+        );
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public MovieDto edit(@PathVariable Long id, @RequestBody MovieDto body) {
-        return modelMapper
-            .map(service.edit(id, modelMapper.map(body, Movie.class)), MovieDto.class);
+    public MovieDTO edit(@PathVariable Long id, @RequestBody MovieDTO body) {
+        return modelMapper.map(
+            service.edit(id, modelMapper.map(body, Movie.class)),
+            MovieDTO.class
+        );
     }
 
     @DeleteMapping("/{id}")

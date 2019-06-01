@@ -4,9 +4,9 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class EventDto extends BaseDto {
+public class EventDTO extends BaseDTO {
 
     private Date date;
-    private MovieDto movie;
-    private RoomDto room;
+    private MovieDTO movie;
+    private RoomDTO room;
 }

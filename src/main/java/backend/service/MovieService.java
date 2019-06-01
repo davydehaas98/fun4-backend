@@ -37,7 +37,7 @@ public class MovieService implements IMovieService {
 //        return modelMapper.map(
 //            repository
 //                .save(new Movie(body.getTitle(), body.getReleaseDate(), body.getImageUrl(), set)),
-//            MovieDto.class
+//            MovieDTO.class
 //        );
     }
 

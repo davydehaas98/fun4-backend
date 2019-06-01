@@ -1,7 +1,7 @@
 package backend.controller;
 
 import backend.model.User;
-import backend.model.dto.UserDto;
+import backend.model.dto.UserDTO;
 import backend.service.UserService;
 import backend.service.interfaces.IUserService;
 import java.util.Collection;
@@ -30,26 +30,26 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto findById(@PathVariable Long id) {
-        return modelMapper.map(service.findById(id), UserDto.class);
+    public UserDTO findById(@PathVariable Long id) {
+        return modelMapper.map(service.findById(id), UserDTO.class);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<UserDto> findAll() {
+    public Collection<UserDTO> findAll() {
         return service.findAll()
             .stream().map(item ->
-                modelMapper.map(item, UserDto.class)
+                modelMapper.map(item, UserDTO.class)
             ).collect(Collectors.toList());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto save(@RequestBody UserDto body) {
-        return modelMapper.map(service.save(modelMapper.map(body, User.class)), UserDto.class);
+    public UserDTO save(@RequestBody UserDTO body) {
+        return modelMapper.map(service.save(modelMapper.map(body, User.class)), UserDTO.class);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto edit(@PathVariable Long id, @RequestBody UserDto body) {
-        return modelMapper.map(service.edit(id, modelMapper.map(body, User.class)), UserDto.class);
+    public UserDTO edit(@PathVariable Long id, @RequestBody UserDTO body) {
+        return modelMapper.map(service.edit(id, modelMapper.map(body, User.class)), UserDTO.class);
     }
 
     @DeleteMapping("/{id}")
