@@ -3,7 +3,8 @@ package backend.model.dto;
 import lombok.Data;
 
 @Data
-public class RoomDto extends BaseDto {
+public class SeatDTO extends BaseDTO {
 
+    private int row;
     private int number;
 }

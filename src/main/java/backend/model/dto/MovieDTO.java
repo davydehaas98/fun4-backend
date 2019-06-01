@@ -5,10 +5,10 @@ import java.util.Set;
 import lombok.Data;
 
 @Data
-public class MovieDto extends BaseDto {
+public class MovieDTO extends BaseDTO {
 
     private String title;
     private Date releaseDate;
     private String imageUrl;
-    private Set<GenreDto> genres;
+    private Set<GenreDTO> genres;
 }

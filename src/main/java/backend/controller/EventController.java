@@ -1,7 +1,7 @@
 package backend.controller;
 
 import backend.model.Event;
-import backend.model.dto.EventDto;
+import backend.model.dto.EventDTO;
 import backend.service.EventService;
 import backend.service.interfaces.IEventService;
 import java.util.Collection;
@@ -30,27 +30,27 @@ public class EventController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public EventDto findById(@PathVariable Long id) {
-        return modelMapper.map(service.findById(id), EventDto.class);
+    public EventDTO findById(@PathVariable Long id) {
+        return modelMapper.map(service.findById(id), EventDTO.class);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<EventDto> findAll() {
+    public Collection<EventDTO> findAll() {
         return service.findAll()
             .stream().map(item ->
-                modelMapper.map(item, EventDto.class)
+                modelMapper.map(item, EventDTO.class)
             ).collect(Collectors.toList());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public EventDto save(@RequestBody EventDto body) {
-        return modelMapper.map(service.save(modelMapper.map(body, Event.class)), EventDto.class);
+    public EventDTO save(@RequestBody EventDTO body) {
+        return modelMapper.map(service.save(modelMapper.map(body, Event.class)), EventDTO.class);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public EventDto edit(@PathVariable Long id, @RequestBody EventDto body) {
+    public EventDTO edit(@PathVariable Long id, @RequestBody EventDTO body) {
         return modelMapper
-            .map(service.edit(id, modelMapper.map(body, Event.class)), EventDto.class);
+            .map(service.edit(id, modelMapper.map(body, Event.class)), EventDTO.class);
     }
 
     @DeleteMapping("/{id}")

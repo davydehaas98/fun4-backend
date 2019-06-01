@@ -4,8 +4,8 @@ import java.util.Collection;
 import lombok.Data;
 
 @Data
-public class CinemaDto extends BaseDto {
+public class CinemaDTO extends BaseDTO {
 
     private String name;
-    private Collection<RoomDto> rooms;
+    private Collection<RoomDTO> rooms;
 }

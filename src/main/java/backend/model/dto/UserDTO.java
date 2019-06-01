@@ -5,11 +5,11 @@ import java.util.Collection;
 import lombok.Data;
 
 @Data
-public class UserDto extends BaseDto {
+public class UserDTO extends BaseDTO {
 
     private String username;
     //private String password;
     private String token;
     private UserRole userRole;
-    private Collection<TicketDto> tickets;
+    private Collection<TicketDTO> tickets;
 }

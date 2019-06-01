@@ -1,8 +1,8 @@
 package backend.controller;
 
 import backend.model.User;
-import backend.model.dto.RegisterUserDto;
-import backend.model.dto.UserDto;
+import backend.model.dto.RegisterUserDTO;
+import backend.model.dto.UserDTO;
 import backend.service.interfaces.IAuthService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
@@ -24,26 +24,26 @@ public class AuthController {
     }
 
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto register(@RequestBody RegisterUserDto body) {
+    public UserDTO register(@RequestBody RegisterUserDTO body) {
         return modelMapper.map(
             service.register(modelMapper.map(body, User.class)),
-            UserDto.class
+            UserDTO.class
         );
     }
 
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto login(@RequestBody RegisterUserDto body) {
+    public UserDTO login(@RequestBody RegisterUserDTO body) {
         return modelMapper.map(
             service.login(modelMapper.map(body, User.class)),
-            UserDto.class
+            UserDTO.class
         );
     }
 
     @PostMapping(value = "/token", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto login(@RequestBody UserDto body) {
+    public UserDTO login(@RequestBody UserDTO body) {
         return modelMapper.map(
             service.checkToken(modelMapper.map(body, User.class)),
-            UserDto.class
+            UserDTO.class
         );
     }
 }

@@ -1,7 +1,7 @@
 package backend.controller;
 
 import backend.model.Cinema;
-import backend.model.dto.CinemaDto;
+import backend.model.dto.CinemaDTO;
 import backend.service.CinemaService;
 import backend.service.interfaces.ICinemaService;
 import java.util.Collection;
@@ -30,27 +30,26 @@ public class CinemaController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CinemaDto findById(@PathVariable Long id) {
-        return modelMapper.map(service.findById(id), CinemaDto.class);
+    public CinemaDTO findById(@PathVariable Long id) {
+        return modelMapper.map(service.findById(id), CinemaDTO.class);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<CinemaDto> findAll() {
-        return service.findAll()
-            .stream().map(item ->
-                modelMapper.map(item, CinemaDto.class)
+    public Collection<CinemaDTO> findAll() {
+        return service.findAll().stream()
+            .map(item ->
+                modelMapper.map(item, CinemaDTO.class)
             ).collect(Collectors.toList());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public CinemaDto save(@RequestBody CinemaDto body) {
-        return modelMapper.map(service.save(modelMapper.map(body, Cinema.class)), CinemaDto.class);
+    public CinemaDTO save(@RequestBody CinemaDTO body) {
+        return modelMapper.map(service.save(modelMapper.map(body, Cinema.class)), CinemaDTO.class);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public CinemaDto edit(@PathVariable Long id, @RequestBody CinemaDto body) {
-        return modelMapper
-            .map(service.edit(id, modelMapper.map(body, Cinema.class)), CinemaDto.class);
+    public CinemaDTO edit(@PathVariable Long id, @RequestBody CinemaDTO body) {
+        return modelMapper.map(service.edit(id, modelMapper.map(body, Cinema.class)), CinemaDTO.class);
     }
 
     @DeleteMapping("/{id}")
