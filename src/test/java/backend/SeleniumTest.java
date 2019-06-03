@@ -17,7 +17,7 @@ public class SeleniumTest {
     private String username = "admin";
     private String password = "password";
 
-    @Before
+    @BeforeEach
     public static void setUp() {
         System.setProperty("webdriver.gecko.driver", "C:/Users/davyd/Downloads/geckodriver.exe");
         url = "http://davydehaas.nl:4042";
@@ -25,7 +25,7 @@ public class SeleniumTest {
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
-    @After
+    @AfterEach
     public static void tearDown() throws Exception {
         driver.quit();
     }
