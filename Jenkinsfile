@@ -40,8 +40,8 @@ pipeline {
         }
         stage("Test") {
             steps {
-                sh "mvn test || true"
-                sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin -Dsonar.password=admin || true"
+                sh "mvn test"
+                sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.token=782c065e976a9c64e0bc748b1278ee1c90ddb4a7 || true"
             }
             post {
                 always {
