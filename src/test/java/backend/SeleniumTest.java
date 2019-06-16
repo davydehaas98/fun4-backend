@@ -1,10 +1,10 @@
 package backend;
 
 import java.util.concurrent.TimeUnit;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,7 +17,7 @@ public class SeleniumTest {
     private String username = "admin";
     private String password = "password";
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         System.setProperty("webdriver.gecko.driver", "C:/Users/davyd/Downloads/geckodriver.exe");
         url = "http://davydehaas.nl:4042";
@@ -25,7 +25,7 @@ public class SeleniumTest {
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown() throws Exception {
         driver.quit();
     }
