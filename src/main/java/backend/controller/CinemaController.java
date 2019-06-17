@@ -49,7 +49,8 @@ public class CinemaController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CinemaDTO edit(@PathVariable Long id, @RequestBody CinemaDTO body) {
-        return modelMapper.map(service.edit(id, modelMapper.map(body, Cinema.class)), CinemaDTO.class);
+        return modelMapper
+            .map(service.edit(id, modelMapper.map(body, Cinema.class)), CinemaDTO.class);
     }
 
     @DeleteMapping("/{id}")
