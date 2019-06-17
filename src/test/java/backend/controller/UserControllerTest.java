@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ class UserControllerTest {
     }
 
     @Test
+    @Disabled
     void test() {
         ResponseEntity<String> response = testRestTemplate.getForEntity("", String.class);
 
