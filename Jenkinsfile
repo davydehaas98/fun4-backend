@@ -41,7 +41,7 @@ pipeline {
         stage("Test") {
             steps {
                 sh "mvn test"
-                sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.token=782c065e976a9c64e0bc748b1278ee1c90ddb4a7 || true"
+                sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.token=532ee2f4408a94e20f667fc0835dc18a257d31a5 || true"
             }
             post {
                 always {
