@@ -1,15 +1,10 @@
 package backend.controller;
 
 import backend.model.Movie;
-import backend.model.dto.GenreDTO;
 import backend.model.dto.MovieDTO;
 import backend.service.MovieService;
 import backend.service.interfaces.IMovieService;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
