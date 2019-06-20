@@ -35,14 +35,13 @@ class UserServiceTest {
 
     @Test
     void testFindAll_returnsAllUsers() {
-        @SuppressWarnings( "unchecked" )
+        @SuppressWarnings("unchecked")
         ArrayList<User> users = mock(ArrayList.class);
 
         when(service.findAll()).thenReturn(users);
 
         assertEquals(service.findAll(), users);
     }
-
 
     @Test
     void testSave_returnsSavedUser() {
