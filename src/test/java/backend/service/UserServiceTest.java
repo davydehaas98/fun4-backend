@@ -1,29 +1,19 @@
 package backend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import backend.model.User;
-import backend.model.enumtype.UserRole;
-import backend.repository.UserRepository;
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith(SpringExtension.class)
 class UserServiceTest {
 
     @Mock
-    private UserRepository repositoryMock;
-
-    @InjectMocks
     private UserService service;
 
     @BeforeEach
@@ -32,14 +22,33 @@ class UserServiceTest {
     }
 
     @Test
-    @Disabled
-    void testSaveUser_returnsNewUser() {
-        when(repositoryMock.save(any(User.class))).thenReturn(new User());
+    void testFindById_returnsUser() {
+        // Arrange
+        User user = mock(User.class);
 
-        User user = new User("username", "password", UserRole.USER);
+        // Act
+        when(service.findById(1L)).thenReturn(user);
 
-//        assertEquals(user, service.save(user));
-        assertEquals(2, service.findAll().size());
-        assertNotEquals(user, service.save(user));
+        // Assert
+        assertEquals(user, service.findById(1L));
+    }
+
+    @Test
+    void testFindAll_returnsAllUsers() {
+        @SuppressWarnings("unchecked")
+        ArrayList<User> users = mock(ArrayList.class);
+
+        when(service.findAll()).thenReturn(users);
+
+        assertEquals(service.findAll(), users);
+    }
+
+    @Test
+    void testSave_returnsSavedUser() {
+        User user = mock(User.class);
+
+        when(service.save(user)).thenReturn(user);
+
+        assertEquals(service.save(user), user);
     }
 }

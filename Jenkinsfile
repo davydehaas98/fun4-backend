@@ -4,12 +4,6 @@ pipeline {
         disableConcurrentBuilds()
         timeout(time: 30, unit: "MINUTES")
     }
-    triggers {
-        gitlab(
-            triggerOnPush: true,
-            triggerOnMergeRequest: true
-        )
-    }
     stages {
         stage("Verify Tools") {
             steps {
