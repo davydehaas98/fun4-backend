@@ -28,11 +28,17 @@ pipeline {
             }
         }
         stage("Build") {
+            agent {
+                docker { image 'maven:3.6.3-jdk-11-openj9' }
+            }
             steps {
                 sh "mvn clean install -B -DskipTests"
             }
         }
         stage("Test") {
+            agent {
+                docker { image 'maven:3.6.3-jdk-11-openj9' }
+            }
             steps {
                 sh "mvn test"
                 sh "mvn sonar:sonar -Dsonar.host.url=https://sonarqube.davydehaas.nl -Dsonar.login=532ee2f4408a94e20f667fc0835dc18a257d31a5 || true"
