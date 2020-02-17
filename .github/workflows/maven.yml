@@ -15,7 +15,7 @@ jobs:
       matrix:
         os: [ubuntu-16.04, ubuntu-18.04]
         java: [11]
-    name: Java ${{ matrix.java }} compile
+    name: Java ${{ matrix.java }} compile on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up Java
@@ -23,7 +23,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-      - name: Build with Maven 
+      - name: Build with Maven
         run: mvn -f pom.xml clean compile
   
   # Build        
@@ -39,8 +39,8 @@ jobs:
         java-version: 11
     - name: Build and Test
       run: mvn -f pom.xml clean verify
-    - name: Upload Maven Build Artifact
-      uses: actions/upload-artifact@v1
-      with:
-        name: artifact
-        path: maven.jar
+#     - name: Upload Maven Build Artifact
+#       uses: actions/upload-artifact@v1
+#       with:
+#         name: artifact
+#         path: maven.jar
